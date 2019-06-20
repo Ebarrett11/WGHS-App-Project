@@ -1,0 +1,210 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    
+}
+
+#home-search{
+    text-align: center;
+}
+
+#home-search-icon{
+    width: 30px;
+    height: 30px;
+}
+
+.menu{
+    float: left;
+    grid-column: span 2;
+}
+.title{
+    color: #333333;
+    font-size: 40px;
+    font-weight: 600;
+    grid-column: span 8;
+    text-align: center;
+}
+.account{
+    
+    grid-column: span 2;
+}
+
+
+
+.content{
+    grid-column: span 12;
+}
+
+.label{
+    grid-column: span 6;
+}
+
+.search{
+    grid-column: span 6;
+}
+
+.account img{
+    float: right;
+}
+
+.blue-content{
+    background: #c3cfe2;
+    height: 100px;
+    
+  
+}
+
+.blue-content2{
+    background: #c3cfe2;
+    height: 100px;
+    margin-top: 140px;
+  
+}
+
+.blue-content p{
+    font-weight: 400;
+    color: #333333;
+    display: inline;
+    vertical-align: middle;
+    font-size: 40px;
+}
+
+.blue-content img{
+    display: inline;
+    margin-top: 5px;
+    vertical-align: middle;
+    width: 90px;
+    height: 90px;
+}
+
+.blue-content #search{
+     display: inline;
+    margin-top: 5px;
+    vertical-align: middle;
+    height: 25px;
+    
+   
+}
+
+.move-content{
+    padding-top: 25px;
+}
+
+.white-content{
+   background: white;
+    height: 100px;
+  
+}
+
+.white-content p{
+     font-weight: 400;
+    color: #333333;
+    display: inline;
+    vertical-align: middle;
+    font-size: 40px;
+}
+
+.white-content img{
+   display: inline;
+    margin-top: 5px;
+    vertical-align: middle;
+    width: 90px;
+    height: 90px;
+}
+
+.white-content #search{
+     display: inline;
+    margin-top: 5px;
+    vertical-align: middle;
+    height: 25px;
+    
+   
+}
+
+#current-jobs{
+    height: 100px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#search{
+    
+    width: 60%;
+}
+
+#search2{
+    height: 200px;
+    width: 80%;
+    
+}
+
+.blue-square{
+    grid-column: span 6;
+    text-align: center;
+    color: #333333;
+    background: #c3cfe2;
+    height: 220px;
+    
+}
+.white-square{
+    grid-column: span 6;
+    text-align: center;
+    color: #333333;
+    background: white;
+    height: 220px;
+    
+}
+
+.blue-square2{
+    margin-top: 10px;
+    grid-column: span 5;
+    text-align: center;
+    color: #333333;
+    background: #c3cfe2;
+    height: 190px;
+    
+}
+
+.divider{
+    grid-column: span 2;
+}
+.white-square2{
+    margin-top: 10px;
+    grid-column: span 5;
+    text-align: center;
+    color: #333333;
+    background: #D3D3D3;
+    height: 190px;
+    
+}
+
+#explain-confirm{
+    font-size: 30px;
+   
+}
+
+#explain-div{
+    text-align: center;
+}
+
+/*
+#upload-text{
+    font-size: 60px;
+ 
+
+    text-decoration: none;
+    color:#333333;
+    
+    
+}
+*/
+
+.square-text{
+    color: #333333;
+    padding-top: 40px;
+    text-align: center;
+    font-size: 30px;
+}
+
