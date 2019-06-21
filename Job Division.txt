@@ -1,12 +1,9 @@
 Job Division Summary (May 30th - July 1st):
   Anna:
-    Prepare development environment for Django backend programming
-    Assist Emmett with anything he needs for the templating process
-    Make backend diagrams and documentation
+    Help Emmett finish the final prototype of the website without backend support
     
   Emmett:
-    Make Template for the ui of the app implemented using web technologies implementable by the Django Web Framework (Read Documentation for what you can use)
-    Propose Template to development team.
+    Make a prototype for the final site using whatever frameworks and things you want to save time and effort.
     Prepare bill for the work effort in the templeting process.
   Luke:
     Assist team in development process
