@@ -1,0 +1,13 @@
+Job Division Summary (May 30th - July 1st):
+  Anna:
+    Help Emmett finish the final prototype of the website without backend support
+    
+  Emmett:
+    Make a prototype for the final site using whatever frameworks and things you want to save time and effort.
+    Prepare bill for the work effort in the templeting process.
+  Luke:
+    Assist team in development process
+    Prepare for backend development in python with Django
+    Make backend diagrams and documentation
+    
+    Make sure to make a bill for you efforts (we will consolidate them into one later)
