@@ -8,7 +8,7 @@ a{
     text-decoration: none;
     color: #fcfcfc;
 }
-.head{
+.banner{
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -17,15 +17,20 @@ a{
 }
 .account_button_container{
     position: relative;
-    margin-right: 3vw;
+    margin-right: 2vw;
 }
 .account_button_container img{
     display: block;
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.3em;
+    height: 2.3em;
     background-color: white;
+    padding: 15px;
+}
+.account_button_container:hover .account_button_dropdown{
+    display: block;
 }
 .account_button_dropdown{
+    display: none;
     position: absolute;
     background: #22223b;
     right: 0;
@@ -35,6 +40,11 @@ a{
 .account_button_dropdown a{
     display: block;
     padding: 20px;
+    text-align: center;
+}
+.account_button_dropdown a:hover{
+    transition: all 0.5s;
+    background-color: black;
 }
 .content{
     display: none;
