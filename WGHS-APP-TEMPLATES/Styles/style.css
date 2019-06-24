@@ -1,13 +1,12 @@
 body{
     margin: 0;
     padding: 0;
-    background: #595F72;
+    background: #1a1a1d;
     font-size: 2.5vmin;
     color: #fcfcfc
 }
 a{
     text-decoration: none;
-    color: #fcfcfc;
 }
 .logo{
     padding-left: 20px;
@@ -18,63 +17,100 @@ a{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #040403;
+    background: #22223b;
 }
 .account_button_container{
+    display: flex;
+    flex-direction: row;
     position: relative;
     margin-right: 2vw;
+    background: white;
+}
+.account_button_container:hover{
+    cursor: pointer;
 }
 .account_button_container img{
     display: block;
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     background-color: white;
-    padding: 15px;
+    padding: 10px;
+    border-radius: 3px 0px 0px 3px;
+    border-right: 1px solid black;
 }
-.account_button_container:hover .account_button_dropdown{
-    display: block;
+.account_icon_arrow{
+    margin: 2px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+    border-width: 7px;
+    align-self: center;
 }
 .account_button_dropdown{
     display: none;
     position: absolute;
-    background: #22223b;
-    right: 0;
-    width: 18vw;
+    background: #fcfcfc;
+    right: 25%;
+    top: 125%;
+    width: auto;
     text-align: center;
+    border-radius: 5px;
+    color: black;
+}
+.account_button_dropdown::before{
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    right: 15px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fcfcfc transparent;
+    border-radius: 2px;
 }
 .account_button_dropdown a{
     display: block;
-    padding: 20px;
+    padding: 20px 5vw;
     text-align: center;
 }
 .account_button_dropdown a:hover{
     transition: all 0.5s;
-    background-color: black;
+    background-color: #5a5560;
 }
 .content{
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.5s;
 }
-
 .element_container{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    /* This is a temp height */
-    height: 50vh;
+    background: #e7dfdd;
+    color: black;
+    padding: 20px;
+    border-bottom: 1px solid black;
 }
+.element_container p{
+    padding: 20px;
+}
+.search{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1vw;
+}
+.search_icon{
+    padding: 10px;
+    vertical-align: middle;
+}
+.search_form{
+    padding: 10px;
 
-.element_container.white{
-    background: white;
 }
-.element_container.blue{
-    background: lightblue;
+.search_form input[type=text]{
+    width: 20vw;
+    height: 2em;
+    vertical-align: middle;
 }
-
+/* Media Queries */
 @media screen and (min-width: 800px){
-    .nav_links{
-
-    }
+    /* Stuff for smaller screens */
 }
