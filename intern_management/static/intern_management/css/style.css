@@ -1,0 +1,151 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #1a1a1d;
+    font-size: 2.5vmin;
+    color: #fcfcfc;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+.logo{
+    padding-left: 20px;
+}
+.banner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #22223b;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+}
+.account_button_container{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-right: 2vw;
+    background: white;
+}
+.account_button_container:hover{
+    cursor: pointer;
+}
+.account_button_container img{
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px 0px 0px 3px;
+    border-right: 1px solid black;
+}
+.account_icon_arrow{
+    margin: 2px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+    border-width: 7px;
+    align-self: center;
+}
+.account_button_dropdown{
+    display: none;
+    position: absolute;
+    background: #fcfcfc;
+    right: 25%;
+    top: 125%;
+    width: auto;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+}
+.account_button_dropdown::before{
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    right: 15px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fcfcfc transparent;
+    border-radius: 2px;
+}
+.account_button_dropdown a{
+    display: block;
+    padding: 20px 5vw;
+    text-align: center;
+}
+.account_button_dropdown a:hover{
+    transition: all 0.5s;
+    background-color: #5a5560;
+}
+.element_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: #e7dfdd;
+    color: black;
+    padding: 20px;
+    border-bottom: 1px solid black;
+}
+.location_brief{
+    display: flex;
+}
+.location_brief_image{
+    display: block;
+    max-width: 25%;
+    max-height: 100%;
+    padding: 10px 20px;
+}
+.location_brief_text{
+    max-width: 75%;
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+.search_icon{
+    vertical-align: bottom;
+    height: 1.5em;
+    width: 1.5em;
+    margin: 3px;
+}
+.search_form{
+    width: 75%;
+}
+.search_form input[type='text']{
+    height: 2em;
+    margin: 5px;
+    vertical-align: middle;
+    width: 75%;
+}
+.search_form input[type='submit']{
+    height: 2.3em;
+}
+/* Media Queries */
+@media screen and (max-width: 800px){
+    /* Stuff for smaller screens */
+    .location_brief{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .location_brief_image{
+        max-height: 40vh;
+        max-width: 100%;
+    }
+    .location_brief_text{
+        max-width: 100%;
+    }
+    .account_button_dropdown{
+        font-size: 1.2em;
+    }
+    .account_button_dropdown a{
+        padding: 20px 10vw;
+    }
+}
