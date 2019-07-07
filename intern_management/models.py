@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class InternshipLocationModel(models.Model):
-    pass
+    address = models.CharField(max_length=400)
 
 class StudentModel(models.Model):
     fname = models.CharField(max_length=200)
