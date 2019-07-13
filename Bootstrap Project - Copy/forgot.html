@@ -1,43 +1,50 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en" dir="ltr">
     <head>
-        <title>Login</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, intitial-scale=1.0">
+        <title>Forgot Password- {{ page }}</title>
+        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
     </head>
-    
     <body>
-       <div class="outer">
-            <div class="middle">
-                <div class="inner">
-                    <div class="log-logo">
-                        <img src="images/logo.png">
-                        <p>WGHS Opportunities</p>
-                    </div>
-                    
-                    <div class="forgot-box">
-                        <input id="username" placeholder="Email" type="text" name="username">
-                        
-                    </div>
-                    <div class="forgot-instructions">
-                        <p>Enter the email attached to your account and we'll send you the link to reset your password</p>
-                    </div>
-                       
-                        
-                    
-                    
-                    
-                    <div class="log-button">
-                        <button id="login-button">Send</button>
-                    </div>
-                    
-                    <div class="log-help">
-                        <a id="login-back" href="login.html">Back to Login </a>
-                        
-                    
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        {% block header %}
+          <!-- no header -->
+        {% endblock %}
+        {% block content %}
+        <div class="outer">
+             <div class="middle">
+                 <div class="inner">
+                     <div class="log-logo">
+                         <img src="images/logo.png">
+                         <p>WGHS Opportunities</p>
+                     </div>
+
+                     <div class="forgot-box">
+                         <input id="username" placeholder="Email" type="text" name="username">
+
+                     </div>
+                     <div class="forgot-instructions">
+                         <p>Enter the email attached to your account and we'll send you the link to reset your password</p>
+                     </div>
+
+
+
+
+
+                     <div class="log-button">
+                         <button id="login-button">Send</button>
+                     </div>
+
+                     <div class="log-help">
+                         <a id="login-back" href="login.html">Back to Login </a>
+
+
+                     </div>
+
+                 </div>
+             </div>
+         </div>
+        {% endblock %}
     </body>
 </html>

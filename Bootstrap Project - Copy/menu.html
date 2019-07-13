@@ -1,10 +1,33 @@
+<!-- THIS is not currently used code im 90% sure -->
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, intitial-scale=1.0">
+        <title>Menu - {{ page }}</title>
+        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
+    </head>
+    <body>
+        {% block header %}
+
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Menu</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
-    
+
     <body>
         <div class="wrapper">
             <div class="menu">
@@ -33,20 +56,20 @@
                     <p>Confirm Hours</p>
                 </div>
                 </a>
-               
+
                 <a href="suggest.html">
                      <div class="blue-content" id="suggest-company">
                     <img src="idea2.png">
                     <p>Suggest Company</p>
                 </div>
                 </a>
-               
+
                 <div class="white-content"></div>
                 <div class="blue-content"></div>
                 <div class="white-content"></div>
-                
+
             </div>
-           
+
         </div>
     </body>
 </html>

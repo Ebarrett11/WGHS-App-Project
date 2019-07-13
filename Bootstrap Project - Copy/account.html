@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en" dir="ltr">
     <head>
-        <title>Account</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, intitial-scale=1.0">
+        <title>Account - {{ page }}</title>
+        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
     </head>
-    
     <body>
+        {% block header %}
         <div class="wrapper">
         <div class="menu">
             <img id="logo" src="images/logo.png">
@@ -15,13 +18,13 @@
                 </a>
 -->
             </div>
-            
+
             <div class="title">
                 <span>Account</span>
             </div>
             <div class="account">
                 <ul>
-  
+
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Menu</a>
     <div class="dropdown-content">
@@ -34,52 +37,52 @@
   </li>
 </ul>
             </div>
-        
+
         </div>
-            
-            <div class="content">
-               
-                
-                    <div class="blue-content">
-                        <img src="images/name2.png">
-                        <p>Emmet Barrett</p>
-                    </div>
-               
-               
-                
-                    <div class="white-content" >
-                    <img src="images/down2.png">
-                    <p>Current Jobs</p>
+        {% endblock %}
+        {% block content %}
+        <div class="content">
+
+
+                <div class="blue-content">
+                    <img src="images/name2.png">
+                    <p>Emmet Barrett</p>
                 </div>
-               
-               
-                
-                    <div class="white-content" id="current-jobs">
-                        <img src="images/line2.png">
-                        <p>Animal Shelter</p>
-                    </div>
-              
-                
-                
-                    <div class="white-content" id="current-jobs">
-                        <img src="images/line2.png">
-                        <p>Coding Internship</p>
-                    </div>
-              
-                
-              
-                    <div class="blue-content">
-                        <img src="images/clock.png">
-<!--                        Im not sure how variables work with html but you could put hours + # here-->
-                        <p>Hours: 45</p>
-                    </div>
-          
-                
-                <div class="white-content"></div>
-                <div class="blue-content"></div>
-                <div class="white-content"></div>
+
+
+
+                <div class="white-content" >
+                <img src="images/down2.png">
+                <p>Current Jobs</p>
             </div>
-            
-        
+
+
+
+                <div class="white-content" id="current-jobs">
+                    <img src="images/line2.png">
+                    <p>Animal Shelter</p>
+                </div>
+
+
+
+                <div class="white-content" id="current-jobs">
+                    <img src="images/line2.png">
+                    <p>Coding Internship</p>
+                </div>
+
+
+
+                <div class="blue-content">
+                    <img src="images/clock.png">
+<!--                        Im not sure how variables work with html but you could put hours + # here-->
+                    <p>Hours: 45</p>
+                </div>
+
+
+            <div class="white-content"></div>
+            <div class="blue-content"></div>
+            <div class="white-content"></div>
+        </div>
+        {% endblock %}
     </body>
 </html>

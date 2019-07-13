@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en" dir="ltr">
     <head>
-        <title>Home</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, intitial-scale=1.0">
+        <title>Home - {{ page }}</title>
+        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
     </head>
-    
     <body>
+        {% block header %}
         <div class="wrapper">
         <div class="menu">
             <img id="logo" src="images/logo.png">
@@ -15,13 +18,13 @@
                 </a>
 -->
             </div>
-            
+
             <div class="title">
                 <span>Home</span>
             </div>
             <div class="account">
                 <ul>
-  
+
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Menu</a>
     <div class="dropdown-content">
@@ -30,31 +33,32 @@
       <a href="confirmhours.html">Confirm </a>
       <a href="suggest.html">Suggest </a>
       <a href="account.html">Account </a>
-      
+
     </div>
   </li>
 </ul>
             </div>
-        
+
         </div>
-        
+        {% endblock %}
+        {% block content %}
         <div class="white-content" id="home-search">
                      <div class="move-content">
                         <img id="home-search-icon" src="images/search.png">
                         <input id="search" type="text" name="search">
-                        
+
                      </div>
-                     
-                   
+
+
                 </div>
         <div id="center-button">
         <button class="button">Search</button>
         </div>
-        
+
         <div class="wrapper">
-            
-           
-            
+
+
+
             <div class="blue-rect">
                 <table class="bio-table">
                 <tr>
@@ -62,23 +66,23 @@
                     <td><span class="bio" id="bio-img">This is a school it is where you go to learn.</span></td>
                     </tr>
                 </table>
-                
+
                 </div>
-                
+
             <div class="white-rect">
-                
+
                 <table class="bio-table">
                 <tr>
                     <td><img class="bio-img" src="images/school2.png"></td>
                     <td><span class="bio" id="bio-img">This is a school it is where you go to learn.</span></td>
                     </tr>
                 </table>
-                </div>   
-            
-      
-                
+                </div>
+
+
+
             <div class="blue-rect">
-                
+
                     <table class="bio-table">
                 <tr>
                     <td><img class="bio-img" src="images/school2.png"></td>
@@ -86,8 +90,8 @@
                     </tr>
                 </table>
                 </div>
-        
-            
+
+
             <div class="white-rect">
                 <table class="bio-table">
                 <tr>
@@ -96,7 +100,7 @@
                     </tr>
                 </table>
                 </div>
-          
+
             <div class="blue-rect">
                  <table class="bio-table">
                 <tr>
@@ -104,7 +108,8 @@
                     <td><span class="bio" id="bio-img">This is a school it is where you go to learn.</span></td>
                     </tr>
                 </table>
-            
+
         </div>
+        {% endblock %}
     </body>
 </html>
