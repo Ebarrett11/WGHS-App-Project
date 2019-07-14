@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, intitial-scale=1.0">
-        <title>WGHS Intern Management System - {{ page }}</title>
-        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+    <title> WGHS Intern Management App- {{ title }}</title>
+    {% else %}
+    <title> WGHS Intern Management App</title>
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
+</head>
+<body>
+
+    <div class="banner">
+        <h2 class="logo_large">Logo</h2>
         {% block header %}
-            <img src="{% static 'intern_management/images/user-icon.svg' %}"/>
         {% endblock %}
-        {% block content %}
-        {% endblock %}
-    </body>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
 </html>
