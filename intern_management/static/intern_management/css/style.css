@@ -1,0 +1,296 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background: #3e4049;;
+    font-size: 2.5vmin;
+    color: #fcfcfc;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: underline;
+    padding: 0px;
+    margin: 0px;
+}
+button{
+    background-color: #333;
+    border: none;
+    color: white;
+    padding: 5px 50px;
+    text-decoration: none;
+    font-size: 1em;
+    height: 2.5em;
+    text-align: center;
+    margin: 10px 0px;
+    width: auto;
+}
+button:hover{
+    background-color: #fcfcfc;
+    color: black;
+    border: 1px solid black;
+    transition: background .2s;
+    cursor: pointer;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+}
+.banner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #303239;
+    color: #fcfcfc;
+}
+.logo_large{
+    padding-left: 20px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+}
+.element_container{
+    display: flex;
+}
+.account_button_container{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-right: 2vw;
+    background: white;
+}
+.account_button_container:hover{
+    cursor: pointer;
+}
+.account_button_container img{
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px 0px 0px 3px;
+    border-right: 1px solid black;
+}
+.account_icon_arrow{
+    margin: 2px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+    border-width: 7px;
+    align-self: center;
+}
+.account_button_dropdown{
+    display: none;
+    position: absolute;
+    background: #fcfcfc;
+    right: 25%;
+    top: 125%;
+    width: auto;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+}
+.account_button_dropdown::before{
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    right: 15px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fcfcfc transparent;
+    border-radius: 2px;
+}
+.account_button_dropdown a{
+    display: block;
+    padding: 20px 5vw;
+    text-align: center;
+}
+.account_button_dropdown a:hover{
+    transition: all 0.5s;
+    background-color: #5a5560;
+}
+.element_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: #e7dfdd;
+    color: black;
+    padding: 20px;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+.location_brief{
+    display: flex;
+}
+.location_brief_image{
+    display: block;
+    max-width: 25%;
+    max-height: 100%;
+    padding: 10px 20px;
+}
+.location_brief_text{
+    max-width: 75%;
+}
+.search{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+.search_icon{
+    vertical-align: middle;
+    height: 1.5em;
+    width: 1.5em;
+    margin: 3px;
+}
+.search_form{
+    text-align: center;
+    width: 75%;
+}
+.search_form input[type='text']{
+    height: 2em;
+    margin: 5px;
+    vertical-align: middle;
+    width: 75%;
+}
+.search_form input[type='submit']{
+    height: 2.3em;
+}
+.center_box{
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    background: #fcfcfc;
+    border-radius: 3px;
+    max-width: 50%;
+    box-shadow: 0px 3px 5px #111111;
+    margin: 3em auto;
+    color: #111111;
+    align-items: center;
+}
+.logo_small{
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.logo_small img{
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0px 10px;
+}
+.logo_small p{
+    font-size: 1.5em;
+    color: #111111;
+}
+.dulled_text{
+    color: #a5a7ac;
+}
+.input_fields{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    padding-bottom: 10px;
+    border: none;
+}
+.input_fields input:not([type="checkbox"]){
+    margin: 10px 0px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 3em;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding-left: 4px;
+}
+.help{
+    width: 100%;
+    background-color: transparent;
+    font-size: .8em;
+}
+.errorlist{
+    color: red;
+    font-size: .5em;
+}
+/* Start Styles that need fixing */
+/* .wrapper{
+display: grid;
+grid-template-columns: repeat(12, 1fr);
+
+}
+#home-search{
+text-align: center;
+}
+#home-search-icon{
+width: 30px;
+height: 30px;
+}
+.menu{
+float: left;
+grid-column: span 2;
+}
+.title{
+color: #333333;
+font-size: 40px;
+font-weight: 600;
+grid-column: span 8;
+text-align: center;
+}
+.account{
+
+grid-column: span 2;
+}
+.content{
+grid-column: span 12;
+}
+.label{
+grid-column: span 6;
+}
+.search{
+grid-column: span 6;
+} */
+/*
+#login{
+
+background-color: #c3cfe2;
+width:60%;
+height: 300px;
+margin: auto;
+margin top
+}
+
+*/
+/* Media Queries */
+@media screen and (max-width: 800px){
+    /* Stuff for smaller screens */
+    .location_brief{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .location_brief_image{
+        max-height: 40vh;
+        max-width: 100%;
+    }
+    .location_brief_text{
+        max-width: 100%;
+    }
+    .account_button_dropdown{
+        font-size: 1.2em;
+    }
+    .account_button_dropdown a{
+        padding: 20px 10vw;
+    }
+}
