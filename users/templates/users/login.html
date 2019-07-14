@@ -1,0 +1,17 @@
+{% extends "intern_management/base.html" %}
+{% load static %}
+{% block content %}
+<div class="center_box">
+    <div class="logo_small">
+        <img src="{% static 'intern_management/images/logo.png' %}">
+        <p>WGHS Opportunities</p>
+    </div>
+    <form method="post">
+        <fieldset class="input_fields">
+        </fieldset>
+        <button type="submit">Login</button>
+    </form>
+    <small class="dulled_text"> Don't already have and account please <a href="{% url 'users:register' %}">Register</a></small>
+    <small><a href="forgot.html">Forgot your password</a>?</small>
+</div>
+{% endblock content %}

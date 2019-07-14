@@ -23,9 +23,9 @@
                 </div>
                 {% endfor %}
             </fieldset>
-            <button id="login-button" type="submit">Register</button>
+            <button type="submit">Register</button>
         </form>
-        <small class="dulled_text">Already have an account? <a id="login-back" href="#"> Login</a></small>
+        <small class="dulled_text">Already have an account? <a id="login-back" href="{% url 'users:login' %}"> Login</a></small>
     </div>
 </div>
 {% endblock content %}
