@@ -1,31 +1,29 @@
 {% extends "intern_management/base.html" %}
 {% load static %}
 {% block content %}
-<div class="content">
-    <div class="center_box">
-        {{ form.non_field_errors }}
-        <div class="logo_small">
-            <img src="{% static 'intern_management/images/logo.png' %}">
-            <p>WGHS Opportunities</p>
-        </div>
-        <form method="post">
-            {% csrf_token %}
-            <fieldset class="input_fields">
-                {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
-                    {% if field.help_text %}
-                    <div class="help">
-                        {{ field.help_text|safe }}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </fieldset>
-            <button type="submit">Register</button>
-        </form>
-        <small class="dulled_text">Already have an account? <a id="login-back" href="{% url 'users:login' %}"> Login</a></small>
+<div class="center_box">
+    {{ form.non_field_errors }}
+    <div class="logo_small">
+        <img src="{% static 'intern_management/images/logo.png' %}">
+        <p>WGHS Opportunities</p>
     </div>
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="input_fields">
+            {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                <div class="help">
+                    {{ field.help_text|safe }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </fieldset>
+        <button type="submit">Register</button>
+    </form>
+    <small class="dulled_text">Already have an account? <a id="login-back" href="{% url 'users:login' %}"> Login</a></small>
 </div>
 {% endblock content %}
