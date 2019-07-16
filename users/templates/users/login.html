@@ -8,6 +8,8 @@
     </div>
     <form method="post">
         <fieldset class="input_fields">
+            {% csrf_token %}
+            {{ form }}
         </fieldset>
         <button type="submit">Login</button>
     </form>

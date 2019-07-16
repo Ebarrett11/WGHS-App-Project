@@ -35,7 +35,7 @@ button:hover{
 form{
     display: flex;
     flex-direction: column;
-    padding-bottom: 5px;
+    width: 100%;
 }
 .banner{
     display: flex;
@@ -130,6 +130,7 @@ form{
 }
 .location_brief_image{
     display: block;
+    object-fit: cover;
     max-width: 25%;
     max-height: 100%;
     padding: 10px 20px;
@@ -153,7 +154,11 @@ form{
     margin: 3px;
 }
 .search_form{
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     width: 75%;
 }
 .search_form input[type='text']{
@@ -201,7 +206,6 @@ form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     padding: 0px;
     padding-bottom: 10px;
     border: none;
