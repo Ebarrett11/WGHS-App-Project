@@ -1,0 +1,20 @@
+{% extends "intern_management/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="center_box">
+        <div class="logo_small">
+            <img src="{% static 'intern_management/images/logo.png' %}">
+            <p>WGHS Opportunities</p>
+        </div>
+        <h2>Password Reset</h2>
+        <p>Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one.</p>
+        <form class="" action="" method="post">
+            {% csrf_token %}
+            <fieldset class="input_fields">
+                <div class="fieldWrapper">
+                    {{ form }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}
