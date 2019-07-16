@@ -55,9 +55,8 @@ form{
     align-items: center;
     flex: 1;
     height: 100%;
-}
-.element_container{
-    display: flex;
+    background: #e7dfdd;
+    color: #111111;
 }
 .account_button_container{
     display: flex;
@@ -172,6 +171,7 @@ form{
 }
 .center_box{
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     padding: 2em;
     background: #fcfcfc;
