@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% if title %}
-    <title> WGHS Intern Management App- {{ title }}</title>
+    <title> WGHS Intern Management App - {{ title }}</title>
     {% else %}
     <title> WGHS Intern Management App</title>
     {% endif %}
@@ -16,8 +16,24 @@
 
     <div class="banner">
         <h2 class="logo_large">Logo</h2>
-        {% block header %}
-        {% endblock %}
+        {% if user.is_authenticated %}
+            <div class="account_button_container" id="account_button_container">
+                <img src="{% static 'intern_management/images/user-icon.svg' %}" alt="User Account Image">
+                <p class='account_icon_arrow'></p>
+                <div class="account_button_dropdown" id="account_button_dropdown">
+                    <p> Signed in as: {{ user.username|upper}}</p>
+                    <hr>
+                    <a href="#">Your Account</a>
+                    <a href="#">Log Hours</a>
+                    <a href="{% url 'users:logout' %}">Log out</a>
+                </div>
+            </div>
+        {% else %}
+        <div class="container">
+            <a href="{% url 'users:login' %}">login</a>
+            <a href="{%url 'users:register' %}">register</a>
+        </div>
+        {% endif %}
     </div>
 
     {% block content %}

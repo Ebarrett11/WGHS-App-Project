@@ -8,4 +8,4 @@ class UserRegisterForm(UserCreationForm):
     last_name = forms.CharField(max_length=100)
     class Meta:
         model = User
-        fields = ['first_name', 'last_name','username', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']

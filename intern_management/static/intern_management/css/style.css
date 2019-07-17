@@ -4,14 +4,11 @@ html, body{
     background: #3e4049;;
     font-size: 2.5vmin;
     color: #fcfcfc;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
-    box-sizing: border-box;
 }
 a{
     text-decoration: underline;
-    padding: 0px;
-    margin: 0px;
 }
 button{
     background-color: #333;
@@ -37,7 +34,14 @@ form{
     flex-direction: column;
     width: 100%;
 }
+img{
+    max-width: 50vw;
+    max-height: 50vh;
+    padding: 10px;
+    margin: 0px;
+}
 .banner{
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -46,17 +50,41 @@ form{
     background: #303239;
     color: #fcfcfc;
 }
+.banner a{
+    margin-right: 20px;
+    color: #fcfcfc;
+}
 .logo_large{
     padding-left: 20px;
 }
-.content{
+.container{
+    box-sizing: border-box;
+    display: flex;
+    margin: 1em;
+}
+.container_column{
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1;
-    height: 100%;
+    width: 100%;
     background: #e7dfdd;
     color: #111111;
+    padding: 2em;
+}
+.container_row{
+    display: flex;
+    flex-direction: row;
+    background: #e7dfdd;
+    color: #111111;
+    padding: 20px;
+}
+.container_description{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box;
 }
 .account_button_container{
     display: flex;
@@ -114,28 +142,35 @@ form{
     transition: all 0.5s;
     background-color: #5a5560;
 }
-.element_container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background: #e7dfdd;
-    color: black;
-    padding: 20px;
-    border-bottom: 1px solid black;
-    width: 100%;
-}
 .location_brief{
     display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #fcfcfc;
+    color: #111111;
+    margin-bottom: 10px;
+    max-width: 90%;
 }
 .location_brief_image{
     display: block;
     object-fit: cover;
-    max-width: 25%;
+    max-width: 15%;
     max-height: 100%;
     padding: 10px 20px;
+    vertical-align: middle;
 }
 .location_brief_text{
     max-width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+.location_brief_text a{
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+}
+.location_brief_text h3{
+    margin: 1em 0 .5em 0;
+    padding: 0px;
 }
 .search{
     box-sizing: border-box;
@@ -176,7 +211,7 @@ form{
     padding: 2em;
     background: #fcfcfc;
     border-radius: 3px;
-    max-width: 50%;
+    max-width: 40%;
     box-shadow: 0px 3px 5px #111111;
     margin: 3em auto;
     color: #111111;

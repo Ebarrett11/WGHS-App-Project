@@ -7,12 +7,19 @@ from .models import InternshipLocationModel
 @login_required
 def details(request):
     if request.method == "GET":
-        if request.GET.get("search") != None:
+        if request.GET.get("search") is not None:
             pass
 
-
-    return render(request, 'intern_management/detail_page.html', { 'locations': InternshipLocationModel.objects.all()})
+    return render(request, 'intern_management/detail_page.html', {
+            'locations': InternshipLocationModel.objects.all()
+        })
 
 
 def account(request):
     return render(request, 'intern_management/account.html')
+
+
+def location_details(request, location_id=0):
+    return render(request, 'intern_management/location.html', {
+        "location": get_object_or_404(InternshipLocationModel, pk=location_id)
+    })

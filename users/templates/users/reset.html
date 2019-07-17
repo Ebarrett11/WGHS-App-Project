@@ -7,8 +7,8 @@
             <p>WGHS Opportunities</p>
         </div>
         <h2>Password Reset</h2>
-        <p>Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one.</p>
-        <form class="" action="" method="post">
+
+        <form method="post">
             {% csrf_token %}
             <fieldset class="input_fields">
                 <div class="fieldWrapper">
@@ -16,5 +16,7 @@
                 </div>
             </fieldset>
         </form>
+        <hr style="width: 100%;">
+        <small>Forgotten your password? Enter your email address above, and we'll email instructions for setting a new one.</small>
     </div>
 {% endblock content %}
