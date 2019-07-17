@@ -23,15 +23,14 @@
                 <div class="account_button_dropdown" id="account_button_dropdown">
                     <p> Signed in as: {{ user.username|upper}}</p>
                     <hr>
-                    <a href="#">Your Account</a>
-                    <a href="#">Log Hours</a>
+                    <a href="#">Profile</a>
                     <a href="{% url 'users:logout' %}">Log out</a>
                 </div>
             </div>
         {% else %}
         <div class="container">
             <a href="{% url 'users:login' %}">login</a>
-            <a href="{%url 'users:register' %}">register</a>
+            <a href="{% url 'users:register' %}">register</a>
         </div>
         {% endif %}
     </div>

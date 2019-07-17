@@ -40,6 +40,9 @@ img{
     padding: 10px;
     margin: 0px;
 }
+hr{
+    width: 90%;
+}
 .banner{
     box-sizing: border-box;
     display: flex;
@@ -122,6 +125,7 @@ img{
     text-align: center;
     border-radius: 5px;
     color: black;
+    z-index: 1;
 }
 .account_button_dropdown::before{
     content: " ";
@@ -134,16 +138,23 @@ img{
     border-radius: 2px;
 }
 .account_button_dropdown a{
+    box-sizing: border-box;
     display: block;
     padding: 20px 5vw;
     text-align: center;
+    width: 100%;
+    color: #111111;
 }
 .account_button_dropdown a:hover{
     transition: all 0.5s;
-    background-color: #5a5560;
+    background-color: #111111;
+    color: #fcfcfc
 }
 .location_brief{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: relative;
     border: 1px solid black;
     border-radius: 5px;
     background: #fcfcfc;
@@ -156,12 +167,13 @@ img{
     object-fit: cover;
     max-width: 15%;
     max-height: 100%;
-    padding: 10px 20px;
+    padding: 0px 5px;
     vertical-align: middle;
 }
 .location_brief_text{
-    max-width: 75%;
+    max-width: 50%;
     display: flex;
+    padding-left: 1em;
     flex-direction: column;
 }
 .location_brief_text a{
@@ -171,6 +183,30 @@ img{
 .location_brief_text h3{
     margin: 1em 0 .5em 0;
     padding: 0px;
+}
+.location_details{
+    display: flex;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 20px;
+}
+.location_menu{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    border-top: 1px solid black;
+    align-items: center;
+}
+.location_menu a{
+    box-sizing: border-box;
+    width: 100%;
+    padding: .5em 4em;
+    margin-top: 10px;
+}
+.arrow:hover{
+    cursor: pointer;
 }
 .search{
     box-sizing: border-box;
@@ -263,6 +299,7 @@ img{
     color: red;
     font-size: .5em;
 }
+
 /* Start Styles that need fixing */
 /* .wrapper{
 display: grid;

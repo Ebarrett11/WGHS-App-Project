@@ -1,8 +1,5 @@
 {% extends "intern_management/base.html" %}
 {% load static %}
-{% block header %}
-
-{% endblock header %}
 {% block content %}
 <div class='content'>
     <div class="container_row white" id="home-search">
@@ -22,19 +19,24 @@
         {% if locations %}
         {% for location in locations %}
         <div class="location_brief">
-            <img class="location_brief_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
-            <div class="location_brief_text">
-                <h3>{{ location.title }}</h3>
-                <small>
-                    {{ location.description|truncatewords:15 }}
-                </small>
-                <small><a href="{% url 'intern_management:location_details' location.pk %}"> go to details...</a></small>
+            <div class="location_details">
+                <img class="location_brief_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
+                <div class="location_brief_text">
+                    <h3>{{ location.title }}</h3>
+                    <small>
+                        {{ location.description|truncatewords:30 }}
+                    </small>
+                </div>
+            </div>
+            <div class="location_menu">
+                <a href="{% url 'intern_management:location_details' location.pk %}">Details</a>
+                <a> Log Hours</a>
             </div>
         </div>
         {% endfor %}
         {% else %}
         <div class="container_row">
-            <h1> There are no locations in the database Sorry :(</h1>
+            <small> You are not signed up for any internships. <a href="">Please request them here</a></small>
         </div>
         {% endif %}
     </div>

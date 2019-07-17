@@ -11,7 +11,7 @@ def details(request):
             pass
 
     return render(request, 'intern_management/detail_page.html', {
-            'locations': InternshipLocationModel.objects.all()
+            'locations': request.user.internshiplocationmodel_set.all()
         })
 
 
