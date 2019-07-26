@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'intern_management.apps.InternManagementConfig',
     'users.apps.UsersConfig',
 ]
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'wghs_intern_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -122,3 +123,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL="intern_management:details"
 LOGIN_URL="users:login"
+
+SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
