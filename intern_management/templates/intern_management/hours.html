@@ -1,0 +1,64 @@
+{% extends "intern_management/base.html" %}
+{% load static %}
+{% block header %}
+<div class="account_button_container" id="account_button_container">
+    <img src="{% static 'intern_management/images/user-icon.svg' %}" alt="User Account Image">
+    <p class='account_icon_arrow'></p>
+    <div class="account_button_dropdown" id="account_button_dropdown">
+        <p> Signed in as: {{ user.username|upper}}</p>
+        <hr>
+        <a href="#">Your Account</a>
+        <a href="#">Log Hours</a>
+        <a href="{% url 'users:logout' %}">Log out</a>
+    </div>
+</div>
+{% endblock header %}
+{% block content %}
+<div class="content">
+
+<h1> Hours </h1>
+
+    <!-- <div class="blue-content">
+        <img src="{% static 'intern_management/images/name2.png' %}" alt="Name Icon">
+        <p>Emmet Barret</p>
+    </div>
+
+
+
+    <div class="white-content" >
+        <img src="Images/down2.png">
+        <p>Current Jobs</p>
+    </div>
+
+
+
+    <div class="white-content" id="current-jobs">
+        <img src="Images/line2.png">
+        <p>Animal Shelter</p>
+    </div>
+
+
+
+    <div class="white-content" id="current-jobs">
+        <img src="Images/line2.png">
+        <p>Coding Internship</p>
+    </div>
+
+
+
+    <div class="blue-content">
+        <img src="Images/clock.png">
+
+        <p>Hours: 45</p>
+    </div>
+
+
+    <div class="white-content"></div>
+    <div class="blue-content"></div>
+    <div class="white-content"></div> -->
+</div>
+
+</div>
+
+<script src="{% static 'intern_management/scripts/main.js' %}" charset="utf-8"></script>
+    {% endblock content %}

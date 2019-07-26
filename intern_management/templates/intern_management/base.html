@@ -23,7 +23,9 @@
                 <div class="account_button_dropdown" id="account_button_dropdown">
                     <p> Signed in as: {{ user.username|upper}}</p>
                     <hr>
-                    <a href="#">Profile</a>
+                    <a href="{% url 'intern_management:detail_page' %}">Main</a>
+                    <a href="{% url 'intern_management:account' %}">Account</a>
+                    <a href="{% url 'intern_management:hours' %}">Hours</a>
                     <a href="{% url 'users:logout' %}">Log out</a>
                 </div>
             </div>

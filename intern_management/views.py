@@ -18,6 +18,12 @@ def details(request):
 def account(request):
     return render(request, 'intern_management/account.html')
 
+def detail_page(request):
+    return render(request, 'intern_management/detail_page.html')
+
+def hours(request):
+    return render(request, 'intern_management/hours.html')
+
 
 def location_details(request, location_id=0):
     return render(request, 'intern_management/location.html', {
