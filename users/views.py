@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 from .forms import UserRegisterForm
 from django.contrib import messages
 # Create your views here.
@@ -19,3 +20,7 @@ def register(request):
 
 def login(request):
     return render(request, 'users/login.html')
+
+
+class ProfileView(TemplateView):
+    template_name = "users/profile.html"

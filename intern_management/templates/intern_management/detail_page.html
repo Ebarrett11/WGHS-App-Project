@@ -7,7 +7,7 @@
             <form method="GET" class="search_form">
                 <div class="fieldWrapper" style="width: 100%;">
                     <label for="search">
-                        <img class="search_icon" src="{% static 'intern_management/images/search.png' %}" height="25px" width="25px">
+                        <img class="search_icon" src="{% static 'intern_management/images/search.png' %}">
                     </label>
                     <input id="search" type="text" name="search">
                 </div>
@@ -17,30 +17,48 @@
     </div>
     <div class="container_column">
         {% if locations %}
-        {% for location in locations %}
-        <div class="location_brief">
-            <div class="location_details">
-                <img class="location_brief_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
-                <div class="location_brief_text">
-                    <h3>{{ location.title }}</h3>
-                    <small>
-                        {{ location.description|truncatewords:30 }}
-                    </small>
+            {% for location in locations %}
+                <div class="location_brief">
+                    <div class="location_details">
+                        <img class="location_brief_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
+                        <div class="location_brief_text">
+                            <h3>{{ location.title }}</h3>
+                            <small>
+                                {{ location.description|truncatewords:30 }}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="location_menu">
+                        <a href="{% url 'intern_management:location_details' location.pk %}">Details</a>
+                        <a> Log Hours</a>
+                    </div>
                 </div>
-            </div>
-            <div class="location_menu">
-                <a href="{% url 'intern_management:location_details' location.pk %}">Details</a>
-                <a> Log Hours</a>
-            </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <div class="container_row">
-            <small> You are not signed up for any internships. <a href="">Please request them here</a></small>
-        </div>
+            {% endfor %}
+            {% else %}
+                <div class="container_row">
+                    <small> You are not signed up for any internships. <a href="">Please request them here</a></small>
+                </div>
         {% endif %}
+        <div class="container_row">
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="margin-link">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="margin-link">Previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a href="?page={{ num }}" class="margin-link">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3'%}
+                        <a href="?page={{ num }}" class="margin-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="margin-link">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="margin-link">Last</a>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
-
-
-    <script src="{% static 'intern_management/scripts/main.js' %}" charset="utf-8"></script>
-    {% endblock content %}
+{% endblock content %}

@@ -3,14 +3,15 @@
 {% block content %}
 <div class="container_column">
     <div class="container_row">
-        <img src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="This is a view of the location">
+        <img class="location_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
         <div class="container_description">
             <h1>{{ location.title }}</h1>
             <p> {{ location.description }} </p>
         </div>
     </div>
     <!-- Place for maps to go -->
-    <div class="container_column" style=" background: black; width: 50vw; height: 90vh; margin: 3em;">
+    <div style=" background: black; width: 100%; height: 90vh; margin-top: 2em;">
     </div>
 </div>
+
 {% endblock content %}

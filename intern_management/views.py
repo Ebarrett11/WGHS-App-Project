@@ -1,20 +1,26 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
+
+from .forms import InternshipSignUpForm
 from .models import InternshipLocationModel
 # Create your views here.
 
 
 class InternshipListView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
-    context_object_name = "locations"
     template_name = "intern_management/detail_page.html"
+    context_object_name = "locations"
+    ordering = "title"
+    paginate_by = 10
 
-def account(request):
-    return render(request, 'intern_management/account.html')
+
+class IntershipLocationDetail(DetailView):
+    model = InternshipLocationModel
+    template_name = "intern_management/location.html"
+    context_object_name = "location"
 
 
-def location_details(request, location_id=0):
-    return render(request, 'intern_management/location.html', {
-        "location": get_object_or_404(InternshipLocationModel, pk=location_id)
-    })
+class InternshipSignUpView(FormView):
+    template_name = 'intern_management/location_sign_up.html'
+    form_class = InternshipSignUpForm
+    success_url = 'users:login'

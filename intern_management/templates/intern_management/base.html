@@ -10,23 +10,17 @@
     {% else %}
     <title> WGHS Intern Management App</title>
     {% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
 </head>
 <body>
-
     <div class="banner">
         <h2 class="logo_large">Logo</h2>
         {% if user.is_authenticated %}
-            <div class="account_button_container" id="account_button_container">
-                <img src="{% static 'intern_management/images/user-icon.svg' %}" alt="User Account Image">
-                <p class='account_icon_arrow'></p>
-                <div class="account_button_dropdown" id="account_button_dropdown">
-                    <p> Signed in as: {{ user.username|upper}}</p>
-                    <hr>
-                    <a href="#">Profile</a>
-                    <a href="{% url 'users:logout' %}">Log out</a>
-                </div>
-            </div>
+        <div class="container">
+            <a href="{% url 'intern_management:details' %}">Internships</a>
+            <a href="{% url 'users:profile' %}">Profile</a>
+        </div>
         {% else %}
         <div class="container">
             <a href="{% url 'users:login' %}">login</a>
@@ -34,7 +28,6 @@
         </div>
         {% endif %}
     </div>
-
     {% block content %}
     {% endblock %}
 </body>
