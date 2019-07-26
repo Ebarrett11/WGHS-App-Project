@@ -1,19 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView
 from .models import InternshipLocationModel
 # Create your views here.
 
 
-@login_required
-def details(request):
-    if request.method == "GET":
-        if request.GET.get("search") is not None:
-            pass
-
-    return render(request, 'intern_management/detail_page.html', {
-            'locations': request.user.internshiplocationmodel_set.all()
-        })
-
+class InternshipListView(LoginRequiredMixin, ListView):
+    model = InternshipLocationModel
+    context_object_name = "locations"
+    template_name = "intern_management/detail_page.html"
 
 def account(request):
     return render(request, 'intern_management/account.html')
