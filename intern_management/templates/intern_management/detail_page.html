@@ -30,7 +30,7 @@
                     </div>
                     <div class="location_menu">
                         <a href="{% url 'intern_management:location_details' location.pk %}">Details</a>
-                        <a> Log Hours</a>
+                        <a href="{% url 'intern_management:location_log' location.pk%}"> Log Hours</a>
                     </div>
                 </div>
             {% endfor %}

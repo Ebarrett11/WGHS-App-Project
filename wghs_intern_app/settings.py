@@ -121,7 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL="intern_management:details"
-LOGIN_URL="users:login"
+
+LOGIN_REDIRECT_URL = "intern_management:details"
+
+LOGIN_URL = "users:login"
 
 SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
