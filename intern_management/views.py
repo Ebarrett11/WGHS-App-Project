@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
@@ -31,32 +31,16 @@ class InternshipSignUpView(FormView):
     success_url = 'users:login'
 
 
-# class InternshipLogHoursView(LoginRequiredMixin, FormView):
-#     template_name = 'intern_management/location_log.html'
-#     form_class = InternshipsLogForm
-#     success_url = 'intern_management:details'
-#
-#     def form_valid(self, form):
-#         print("form was valid")
-#         return super().form_valid(form)
+class InternshipLogHoursView(LoginRequiredMixin, FormView):
+    template_name = 'intern_management/location_log.html'
+    form_class = InternshipLogForm
+    success_url = 'intern_management:details'
 
-@login_required
-def internship_log_hours_view(request, pk):
-    location = get_object_or_404(InternshipLocationModel, pk=pk)
-    if request.method == "POST":
-        form = InternshipLogForm(request.POST)
-        if form.is_valid():
-            send_mail(
-                "New Request to log Hours",
-                "Request to log hours at {} by {}".format( location.title, request.user.username),
-                "localhost",
-                ["Cu-Sith@gmx.com"]
-            )
-            return redirect('intern_management:details')
-    else:
-        form = InternshipLogForm()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.setdefault("location", get_object_or_404(InternshipLocationModel, pk=self.kwargs.get("pk")))
+        return context
 
-    return render(request, 'intern_management/location_log.html', {
-        'form': form,
-        'location': location
-    })
+    def form_valid(self, form):
+        print("form was valid")
+        return super().form_valid(form)
