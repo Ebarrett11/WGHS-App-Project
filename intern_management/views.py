@@ -1,6 +1,5 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
@@ -34,7 +33,7 @@ class InternshipSignUpView(FormView):
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
     template_name = 'intern_management/location_log.html'
     form_class = InternshipLogForm
-    success_url = reverse_lazy('intern_management:details')
+    success_url = 'intern_management:details'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
