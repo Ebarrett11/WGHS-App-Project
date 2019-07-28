@@ -1,8 +1,7 @@
-from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
-from django.core.mail import send_mail
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
 # Create your views here.
@@ -12,11 +11,12 @@ class InternshipListView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
     template_name = "intern_management/detail_page.html"
     context_object_name = "locations"
-    ordering = "title"
     paginate_by = 10
 
     def get_queryset(self):
-        return InternshipLocationModel.objects.all().filter(user=self.request.user)
+        return InternshipLocationModel.objects.all().filter(
+            user=self.request.user
+        ).order_by('title')
 
 
 class IntershipLocationDetail(DetailView):
@@ -34,12 +34,20 @@ class InternshipSignUpView(FormView):
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
     template_name = 'intern_management/location_log.html'
     form_class = InternshipLogForm
-    success_url = 'intern_management:details'
+    success_url = reverse_lazy('intern_management:details')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.setdefault("location", get_object_or_404(InternshipLocationModel, pk=self.kwargs.get("pk")))
-        return context
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        initial = kwargs.get('initial', {})
+        initial.update({'locations': InternshipLocationModel.objects.all().filter(
+                user=self.request.user
+            )
+        })
+        kwargs.update({
+            'initial': initial
+        })
+
+        return kwargs
 
     def form_valid(self, form):
         print("form was valid")
