@@ -38,7 +38,8 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         initial = kwargs.get('initial', {})
-        initial.update({'locations': InternshipLocationModel.objects.all().filter(
+        initial.update({
+            'locations': InternshipLocationModel.objects.all().filter(
                 user=self.request.user
             )
         })

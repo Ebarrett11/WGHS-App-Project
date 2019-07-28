@@ -301,6 +301,11 @@ hr{
     border-radius: 3px;
     padding-left: 4px;
 }
+.input_fields select{
+    width: 100%;
+    height: 3em;
+    margin: 10px 0px;
+}
 .help{
     width: 100%;
     background-color: transparent;
