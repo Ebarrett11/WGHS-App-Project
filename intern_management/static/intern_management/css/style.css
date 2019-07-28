@@ -119,6 +119,23 @@ hr{
     max-width: 100%;
     padding: 0px 20px;
 }
+.center_box{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    padding: 2em;
+    background: #fcfcfc;
+    border-radius: 3px;
+    max-width: 40vw;
+    box-shadow: 0px 3px 5px #111111;
+    margin: 3em auto;
+    color: #111111;
+    align-items: center;
+}
 .location_brief{
     display: -webkit-box;
     display: -moz-box;
@@ -240,23 +257,7 @@ hr{
 .search_form input[type='submit']{
     height: 2.3em;
 }
-.center_box{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    padding: 2em;
-    background: #fcfcfc;
-    border-radius: 3px;
-    max-width: 35%;
-    box-shadow: 0px 3px 5px #111111;
-    margin: 3em auto;
-    color: #111111;
-    align-items: center;
-}
+
 .logo_small{
     display: -webkit-box;
     display: -moz-box;
@@ -345,57 +346,13 @@ hr{
     grid-area: internships;
 }
 
-/* Start Styles that need fixing */
-/* .wrapper{
-display: grid;
-grid-template-columns: repeat(12, 1fr);
+@media screen and (max-width: 1000px){
 
+    .center_box{
+        max-width: 75vw;
+    }
 }
-#home-search{
-text-align: center;
-}
-#home-search-icon{
-width: 30px;
-height: 30px;
-}
-.menu{
-float: left;
-grid-column: span 2;
-}
-.title{
-color: #333333;
-font-size: 40px;
-font-weight: 600;
-grid-column: span 8;
-text-align: center;
-}
-.account{
-
-grid-column: span 2;
-}
-.content{
-grid-column: span 12;
-}
-.label{
-grid-column: span 6;
-}
-.search{
-grid-column: span 6;
-} */
-/*
-#login{
-
-background-color: #c3cfe2;
-width:60%;
-height: 300px;
-margin: auto;
-margin top
-}
-
-*/
-/* Media Queries */
-@media screen and (max-width: 800px){
-    /* Stuff for smaller screens */
+@media screen and (max-width: 600px){
     .location_brief{
         flex-direction: column;
         justify-content: center;
@@ -407,11 +364,5 @@ margin top
     }
     .location_brief_text{
         max-width: 100%;
-    }
-    .account_button_dropdown{
-        font-size: 1.2em;
-    }
-    .account_button_dropdown a{
-        padding: 20px 10vw;
     }
 }
