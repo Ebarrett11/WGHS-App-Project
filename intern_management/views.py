@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.urls import reverse_lazy
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
 # Create your views here.
@@ -41,7 +42,7 @@ class InternshipSignUpView(FormView):
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
     template_name = 'intern_management/location_log.html'
     form_class = InternshipLogForm
-    success_url = 'intern_management:details'
+    success_url = reverse_lazy('intern_management:details')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -59,5 +60,11 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
-        print("form was valid")
+        context = {
+            'name': form.cleaned_data['name'],
+            'location': form.cleaned_data['location'].title,
+            'hours': form.cleaned_data['hours'],
+        }
+
+        form.send_mail(context, "Cu-Sith@gmx.com")
         return super().form_valid(form)
