@@ -275,6 +275,22 @@ img{
 .margin-link{
     margin: 0px 5px;
 }
+.messages{
+    display: flex;
+    background: #e7dfdd;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    justify-content: center;
+    width: 100%;
+    padding: 1em;
+}
+.message-success{
+    background-color: rgba(0,229,0,0.6);
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px;
+}
 .search{
     display: -webkit-box;
     display: -moz-box;
@@ -315,22 +331,7 @@ img{
 .search_form input[type='submit']{
     height: 2.3em;
 }
-.messages{
-    display: flex;
-    background: #e7dfdd;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    justify-content: center;
-    width: 100%;
-    padding: 1em;
-}
-.message-success{
-    background-color: rgba(0,229,0,0.6);
-    width: 90%;
-    height: 100%;
-    text-align: center;
-    border-radius: 5px;
-}
+
 /* Testing Grid */
 
 .profile-site{
