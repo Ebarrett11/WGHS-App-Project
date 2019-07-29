@@ -21,7 +21,7 @@ class InternshipLogForm(forms.Form):
         super().__init__(*args, **kwargs)
         location_field = self.fields['location']
         location_field.queryset = kwargs['initial'].get('locations')
-        # location_field.initial = kwargs['initial'].get('pk')
+        location_field.initial = kwargs['initial'].get('pk')
 
     def send_mail(self):
         pass

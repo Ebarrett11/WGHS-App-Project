@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.db.models import Q
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
 # Create your views here.
@@ -13,9 +13,17 @@ class InternshipListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return InternshipLocationModel.objects.all().filter(
+        queryset = InternshipLocationModel.objects.filter(
             user=self.request.user
         ).order_by('title')
+
+        if self.request.GET.get('search'):
+            queryset = InternshipLocationModel.objects.filter(
+                Q(user=self.request.user)
+                & Q(title__contains=self.request.GET.get('search'))
+                | Q(description__contains=self.request.GET.get('search'))
+            ).order_by('title')
+        return queryset
 
 
 class IntershipLocationDetail(DetailView):
@@ -42,7 +50,7 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             'locations': InternshipLocationModel.objects.all().filter(
                 user=self.request.user
             ),
-            # 'pk': 3,
+            'pk': self.kwargs.get("pk"),
         })
         kwargs.update({
             'initial': initial
