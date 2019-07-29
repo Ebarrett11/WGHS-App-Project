@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.db.models import Q
 from django.urls import reverse_lazy
 from .forms import InternshipSignUpForm, InternshipLogForm
@@ -66,5 +67,6 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             'hours': form.cleaned_data['hours'],
         }
 
-        form.send_mail(context, "Cu-Sith@gmx.com")
+        form.send_mail(context, form.cleaned_data['location'].contact_email)
+        messages.success(self.request, 'Request Submitted Successfully')
         return super().form_valid(form)

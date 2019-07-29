@@ -9,6 +9,7 @@ html, body{
     font-family: 'Muli', sans-serif;
     box-sizing: border-box;
 }
+
 a{
     text-decoration: underline;
 }
@@ -40,18 +41,17 @@ form{
     flex-direction: column;
     width: 100%;
 }
+hr{
+    width: 90%;
+}
 img{
     max-width: 50vw;
     max-height: 50vh;
     padding: 10px;
     margin: 0px;
 }
-hr{
-    width: 90%;
-}
-.margin-link{
-    margin: 0px 5px;
-}
+
+
 .banner{
     display: -webkit-box;
     display: -moz-box;
@@ -136,6 +136,43 @@ hr{
     color: #111111;
     align-items: center;
 }
+.dulled_text{
+    color: #a5a7ac;
+}
+.errorlist{
+    color: red;
+    font-size: .5em;
+}
+.help{
+    width: 100%;
+    background-color: transparent;
+    font-size: .8em;
+}
+.input_fields{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px;
+    padding-bottom: 10px;
+    border: none;
+}
+.input_fields input:not([type="checkbox"]){
+    margin: 10px 0px;
+    width: 100%;
+    height: 3em;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding-left: 4px;
+}
+.input_fields select{
+    width: 100%;
+    height: 3em;
+    margin: 10px 0px;
+}
 .location_brief{
     display: -webkit-box;
     display: -moz-box;
@@ -214,8 +251,29 @@ hr{
     max-height: 100%;
     padding: 0px;
 }
-.arrow:hover{
-    cursor: pointer;
+.logo_small{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.logo_small img{
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0px 10px;
+}
+.logo_small p{
+    font-size: 1.5em;
+    color: #111111;
+}
+.margin-link{
+    margin: 0px 5px;
 }
 .search{
     display: -webkit-box;
@@ -257,66 +315,22 @@ hr{
 .search_form input[type='submit']{
     height: 2.3em;
 }
-
-.logo_small{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+.messages{
     display: flex;
-    flex-direction: row;
-    vertical-align: middle;
-    width: 100%;
-    align-items: center;
+    background: #e7dfdd;
+    flex-wrap: wrap;
+    box-sizing: border-box;
     justify-content: center;
-}
-.logo_small img{
-    height: 1.5em;
-    width: 1.5em;
-    margin: 0px 10px;
-}
-.logo_small p{
-    font-size: 1.5em;
-    color: #111111;
-}
-.dulled_text{
-    color: #a5a7ac;
-}
-.input_fields{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0px;
-    padding-bottom: 10px;
-    border: none;
-}
-.input_fields input:not([type="checkbox"]){
-    margin: 10px 0px;
     width: 100%;
-    height: 3em;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding-left: 4px;
+    padding: 1em;
 }
-.input_fields select{
-    width: 100%;
-    height: 3em;
-    margin: 10px 0px;
+.message-success{
+    background-color: rgba(0,229,0,0.6);
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px;
 }
-.help{
-    width: 100%;
-    background-color: transparent;
-    font-size: .8em;
-}
-.errorlist{
-    color: red;
-    font-size: .5em;
-}
-
 /* Testing Grid */
 
 .profile-site{

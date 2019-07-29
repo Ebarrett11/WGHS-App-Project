@@ -1,34 +1,43 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% if title %}
-    <title> WGHS Intern Management App - {{ title }}</title>
-    {% else %}
-    <title> WGHS Intern Management App</title>
-    {% endif %}
-    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
-</head>
-<body>
-    <div class="banner">
-        <h2 class="logo_large">Logo</h2>
-        {% if user.is_authenticated %}
-        <div class="container">
-            <a href="{% url 'intern_management:details' %}">Internships</a>
-            <a href="{% url 'users:profile' %}">Profile</a>
-        </div>
+        {% if title %}
+        <title> WGHS Intern Management App - {{ title }}</title>
         {% else %}
-        <div class="container">
-            <a href="{% url 'users:login' %}">login</a>
-            <a href="{% url 'users:register' %}">register</a>
-        </div>
+        <title> WGHS Intern Management App</title>
         {% endif %}
-    </div>
-    {% block content %}
-    {% endblock %}
-</body>
+        <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
+    </head>
+    <body>
+        <div class="banner">
+            <h2 class="logo_large">Logo</h2>
+            {% if user.is_authenticated %}
+            <div class="container">
+                <a href="{% url 'intern_management:details' %}">Internships</a>
+                <a href="{% url 'users:profile' %}">Profile</a>
+            </div>
+            {% else %}
+            <div class="container">
+                <a href="{% url 'users:login' %}">login</a>
+                <a href="{% url 'users:register' %}">register</a>
+            </div>
+            {% endif %}
+        </div>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="message-{{ message.tags }}">
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </body>
 </html>
