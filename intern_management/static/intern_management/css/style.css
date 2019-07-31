@@ -32,6 +32,14 @@ button:hover{
     transition: background .2s;
     cursor: pointer;
 }
+footer{
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #111;
+    margin: 0px;
+    padding: 2em;
+    font-size: .8em;
+}
 form{
     display: -webkit-box;
     display: -moz-box;
@@ -303,6 +311,7 @@ img{
     align-items: center;
     width: 100%;
     height: auto;
+    margin-top: 1em;
 }
 .search_icon{
     vertical-align: middle;
