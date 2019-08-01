@@ -1,27 +1,23 @@
 
-  E:
-  
-  Design the hours, account, and suggest page
-  
-  Add in a way to suggest companies (most likely in the footer)
-  
-  Add footer (in base most likely)
-   
-  Comment all code so it's maintainable as well as write up docs for it
-  
-  
-  
-  
-  L:
-  Implement map api (good luck)
-  
-  Add in a way to log hours
-  
-  Add in a way to confirm hours (email most likely)
-    When first setting up an account could input counselors email that the confirmation email would go to
-    
-  make Custing Admin Object for (Admin page for school officials to input opportunities)
-    
- Make a working search (Save for last most likely)
- 
- 
+E:
+
+    Design the account, and suggest page
+
+    Add in a way to suggest companies (most likely in the footer)
+
+
+    Comment all code so it's maintainable as well as write up docs for it
+
+
+
+
+L:
+    Make better email template
+
+    Implement map API
+
+    Finish Location Sign Up page and Log hours page functionality
+
+
+Things to talk about with Irvin:
+    Email servers, need smtp to send email. Idk if they already have one or if they need one. Can use google

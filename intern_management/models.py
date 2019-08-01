@@ -8,6 +8,7 @@ class InternshipLocationModel(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     user = models.ManyToManyField(User)
+    contact_email = models.EmailField(default="")
 
     def __str__(self):
         return self.title

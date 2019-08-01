@@ -1,6 +1,9 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib import messages
+from django.db.models import Q
+from django.urls import reverse_lazy
+from django.conf import settings
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
 # Create your views here.
@@ -13,9 +16,17 @@ class InternshipListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return InternshipLocationModel.objects.all().filter(
+        queryset = InternshipLocationModel.objects.filter(
             user=self.request.user
         ).order_by('title')
+
+        if self.request.GET.get('search'):
+            queryset = InternshipLocationModel.objects.filter(
+                Q(user=self.request.user)
+                & Q(title__contains=self.request.GET.get('search'))
+                | Q(description__contains=self.request.GET.get('search'))
+            ).order_by('title')
+        return queryset
 
 
 class IntershipLocationDetail(DetailView):
@@ -27,13 +38,25 @@ class IntershipLocationDetail(DetailView):
 class InternshipSignUpView(FormView):
     template_name = 'intern_management/location_sign_up.html'
     form_class = InternshipSignUpForm
-    success_url = 'users:login'
+    success_url = reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        context = {
+            'name': form.cleaned_data['location_name'],
+            'address': form.cleaned_data['location_address'].title,
+            'website': form.cleaned_data['location_website'],
+            'email': form.cleaned_data['location_email'],
+        }
+
+        form.send_mail(context, settings.ADMIN_EMAIL)
+        messages.success(self.request, 'Request Submitted Successfully')
+        return super().form_valid(form)
 
 
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
     template_name = 'intern_management/location_log.html'
     form_class = InternshipLogForm
-    success_url = 'intern_management:details'
+    success_url = reverse_lazy('intern_management:details')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -41,7 +64,8 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         initial.update({
             'locations': InternshipLocationModel.objects.all().filter(
                 user=self.request.user
-            )
+            ),
+            'pk': self.kwargs.get("pk"),
         })
         kwargs.update({
             'initial': initial
@@ -50,5 +74,12 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
-        print("form was valid")
+        context = {
+            'name': form.cleaned_data['name'],
+            'location': form.cleaned_data['location'].title,
+            'hours': form.cleaned_data['hours'],
+        }
+
+        form.send_mail(context, form.cleaned_data['location'].contact_email)
+        messages.success(self.request, 'Request Submitted Successfully')
         return super().form_valid(form)
