@@ -128,3 +128,5 @@ LOGIN_URL = "users:login"
 SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+ADMIN_EMAIL = 'test@testing.com'

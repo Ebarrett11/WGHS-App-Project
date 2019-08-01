@@ -298,6 +298,7 @@ img{
     height: 100%;
     text-align: center;
     border-radius: 5px;
+    border: 5px solid rgba(0,230,0,1);
 }
 .search{
     display: -webkit-box;
@@ -350,10 +351,14 @@ img{
     grid-template-areas:
             'profile-name'
             'internships';
-    background: #e7dfdd;
+    box-sizing: border-box;
+    background: #fcfcfc;
     min-height: 100%;
     color: #111;
-    padding: 2em;
+    padding: 1em;
+    margin: 2em;
+    border-radius: 5px;
+    border: 2px solid black;
 }
 .profile-image{
     max-width: 15%;

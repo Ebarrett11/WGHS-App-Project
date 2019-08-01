@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.conf import settings
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
 # Create your views here.
@@ -37,7 +38,19 @@ class IntershipLocationDetail(DetailView):
 class InternshipSignUpView(FormView):
     template_name = 'intern_management/location_sign_up.html'
     form_class = InternshipSignUpForm
-    success_url = 'users:login'
+    success_url = reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        context = {
+            'name': form.cleaned_data['location_name'],
+            'address': form.cleaned_data['location_address'].title,
+            'website': form.cleaned_data['location_website'],
+            'email': form.cleaned_data['location_email'],
+        }
+
+        form.send_mail(context, settings.ADMIN_EMAIL)
+        messages.success(self.request, 'Request Submitted Successfully')
+        return super().form_valid(form)
 
 
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
