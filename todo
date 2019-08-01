@@ -1,11 +1,10 @@
 
 E:
 
-    Design the hours, account, and suggest page
+    Design the account, and suggest page
 
     Add in a way to suggest companies (most likely in the footer)
 
-    Add footer (in base most likely)
 
     Comment all code so it's maintainable as well as write up docs for it
 
@@ -17,8 +16,7 @@ L:
 
     Implement map API
 
-    Make Custom Admin Object for (Admin page for school officials to input opportunities)
-
+    Finish Location Sign Up page and Log hours page functionality
 
 
 Things to talk about with Irvin:
