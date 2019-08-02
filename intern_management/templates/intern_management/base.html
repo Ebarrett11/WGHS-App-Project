@@ -18,6 +18,7 @@
             <h2 class="logo_large">Logo</h2>
             {% if user.is_authenticated %}
             <div class="container">
+                <a>signed in: {{ user|upper }}</a>
                 <a href="{% url 'intern_management:details' %}">Internships</a>
                 <a href="{% url 'users:profile' %}">Profile</a>
             </div>
