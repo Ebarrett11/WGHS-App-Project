@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
+from users.models import StudentProfile
 # Create your views here.
 
 
@@ -16,15 +17,16 @@ class InternshipListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = InternshipLocationModel.objects.filter(
+        queryset = StudentProfile.objects.get(
             user=self.request.user
-        ).order_by('title')
+        ).locations.all().order_by('title')
 
         if self.request.GET.get('search'):
-            queryset = InternshipLocationModel.objects.filter(
-                Q(user=self.request.user)
-                & Q(title__contains=self.request.GET.get('search'))
-                | Q(description__contains=self.request.GET.get('search'))
+            queryset = StudentProfile.objects.get(
+                user=self.request.user
+            ).locations.filter(
+                Q(title__contains=self.request.GET['search'])
+                | Q(description__contains=self.request.GET['search'])
             ).order_by('title')
         return queryset
 
