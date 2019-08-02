@@ -301,7 +301,11 @@ img{
     height: 100%;
     text-align: center;
     border-radius: 5px;
+<<<<<<< HEAD
     border: 4px solid rgba(0,200,0,1);
+=======
+    border: 5px solid rgba(0,230,0,1);
+>>>>>>> d1199fbb4d24b48a5620cdde62bc152a55307e10
     justify-content: center;
     align-items: center;
 }
@@ -309,7 +313,10 @@ img{
     content: '\2713';
     height: 100%;
     vertical-align: middle;
+<<<<<<< HEAD
     font-size: 1.2em;
+=======
+>>>>>>> d1199fbb4d24b48a5620cdde62bc152a55307e10
     padding: 1em;
 }
 .search{
