@@ -3,6 +3,7 @@ from .models import InternshipLocationModel
 # Register your models here.
 admin.site.site_header = "WGHS Internship Management"
 
+
 @admin.register(InternshipLocationModel)
 class InternshipAdmin(admin.ModelAdmin):
     ordering = ['title']
@@ -18,8 +19,7 @@ class InternshipAdmin(admin.ModelAdmin):
             'fields': ('description',)
         }),
         ('Students', {
-            'classes': ['wide'],
-            'fields': ('user',)
+            'fields': ('students',)
         })
 
     ]
