@@ -1,11 +1,16 @@
-from django.views.generic import ListView, DetailView, FormView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.sites.shortcuts import get_current_site
+from django.views.generic import ListView, DetailView, FormView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+
 from .forms import InternshipSignUpForm, InternshipLogForm
 from .models import InternshipLocationModel
+from .tokens import default_token_generator as token_gen
 # Create your views here.
 
 
@@ -17,7 +22,6 @@ class InternshipListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = self.request.user.internshiplocationmodel_set.order_by('title')
-
         if self.request.GET.get('search'):
             queryset = self.request.user.internshiplocationmodel_set.filter(
                 Q(title__contains=self.request.GET['search'])
@@ -51,7 +55,7 @@ class InternshipSignUpView(FormView):
 
 
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
-    template_name = 'intern_management/location_log.html'
+    template_name = 'intern_management/location_hours_log.html'
     form_class = InternshipLogForm
     success_url = reverse_lazy('intern_management:details')
 
@@ -69,12 +73,24 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
+
         context = {
             'name': form.cleaned_data['name'],
             'location': form.cleaned_data['location'].title,
             'hours': form.cleaned_data['hours'],
+            'domain': get_current_site(self.request),
+            'lid': urlsafe_base64_encode(force_bytes(form.cleaned_data['location'].pk)).decode(),
+            'token': token_gen.make_token(self.request.user, form.cleaned_data['location']),
         }
 
         form.send_mail(context, form.cleaned_data['location'].contact_email)
         messages.success(self.request, 'Request Submitted Successfully')
         return super().form_valid(form)
+
+
+class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
+                                 TemplateView):
+    template_name = "intern_management/location_hours_confirm.html"
+
+    def test_func(self):
+        return True

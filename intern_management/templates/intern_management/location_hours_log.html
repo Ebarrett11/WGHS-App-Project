@@ -1,0 +1,19 @@
+{% extends "intern_management/base.html" %}
+{% load static %}
+{% block content %}
+<div class="center_box">
+    <div class="logo_small">
+        <img src="{% static 'intern_management/images/logo.png' %}">
+        <p>WGHS Opportunities</p>
+    </div>
+    <form method="post">
+        <center><h3>Log Your Hours</h3></center>
+        <fieldset class="input_fields">
+            {% csrf_token %}
+            {{ form }}
+        </fieldset>
+        <button type="submit">Send Info</button>
+    </form>
+</div>
+
+{% endblock content %}
