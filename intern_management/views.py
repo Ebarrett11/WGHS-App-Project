@@ -1,11 +1,12 @@
+import hashlib
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import ListView, DetailView, FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, F
 from django.urls import reverse_lazy
 from django.conf import settings
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
 from .forms import InternshipSignUpForm, InternshipLogForm
@@ -73,17 +74,41 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
+        import string
+        import random
+        salt = ''.join(
+            random.SystemRandom().choice(
+                string.ascii_letters + string.digits
+            ) for _ in range(10)
+        )
+        location = form.cleaned_data['location']
+        token = token_gen.make_token(
+            location,
+            salt
+        )
 
+        # context for email to be sent
         context = {
             'name': form.cleaned_data['name'],
-            'location': form.cleaned_data['location'].title,
+            'location': location.title,
             'hours': form.cleaned_data['hours'],
             'domain': get_current_site(self.request),
-            'lid': urlsafe_base64_encode(force_bytes(form.cleaned_data['location'].pk)).decode(),
-            'token': token_gen.make_token(self.request.user, form.cleaned_data['location']),
+            'lid': urlsafe_base64_encode(
+                force_bytes(location.pk)
+                + b':'
+                + force_bytes(salt)
+            ).decode(),
+            'token': token,
         }
 
-        form.send_mail(context, form.cleaned_data['location'].contact_email)
+        # save token to location
+        location.outstanding_tokens += str(hashlib.sha256(
+            force_bytes(token)
+        ).hexdigest()) + ':'
+        location.save()
+
+        # send email to location manager
+        form.send_mail(context, location.contact_email)
         messages.success(self.request, 'Request Submitted Successfully')
         return super().form_valid(form)
 
@@ -93,4 +118,31 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
     template_name = "intern_management/location_hours_confirm.html"
 
     def test_func(self):
-        return True
+        """
+            Must return True for user to access view
+
+            Requirements:
+                User must have valid Url token
+                    token must be used within allocated time
+                    token must be part of token list on database location
+                User must be logged in as Manager for that location
+        """
+        # Get req info from request and Url
+        user = self.request.user
+        decoded_url = urlsafe_base64_decode(self.kwargs['LID'])
+        params = tuple(decoded_url.split(b':'))
+        location = InternshipLocationModel.objects.get(
+            pk=int(params[0])
+        )
+        salt = params[1].decode()
+        token = self.kwargs['token']
+        # Validate Token
+        if token_gen.check_token(location,
+                                 salt, token):
+            if user == location.manager:
+                return True
+
+        # If token fails return False
+        else:
+            print("Token Validation fail")
+            return False

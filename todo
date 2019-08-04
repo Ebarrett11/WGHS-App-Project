@@ -14,6 +14,8 @@ E:
 L:
     Finish Location Sign Up page and Log hours page functionality
 
+    Fix User problem with Log hours page
+
     Make better email template
 
     Implement map API
