@@ -19,7 +19,7 @@ class InternshipListView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
     template_name = "intern_management/detail_page.html"
     context_object_name = "locations"
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = self.request.user.internshiplocationmodel_set.order_by('title')
