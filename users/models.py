@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from intern_management.models import InternshipLocationModel
 # Create your models here.
 
 
-class StudentProfile(models.Model):
+class Profile(models.Model):
+    choices = [
+        ('Student', 'Student'),
+        ('Man', 'Location Manager'),
+    ]
+    type = models.CharField(choices=choices, max_length=7)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    internships = models.ManyToManyField(InternshipLocationModel)

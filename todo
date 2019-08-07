@@ -7,17 +7,42 @@ E:
 
 
     Comment all code so it's maintainable as well as write up docs for it
+    
+    Make printouts for DR IRVING
+    
+    Google Form
+    
+    Make links buttons on detail page (class= button)
 
 
 
 
 L:
-    Make better email template
+    Finish Location Sign Up page and Log hours page functionality
+
+    Fix User problem with Log hours page
+
+    Make better email template hours and email students after their hours are confirmed or denied
 
     Implement map API
 
-    Finish Location Sign Up page and Log hours page functionality
-
+    Make internship Location Managers more useful
 
 Things to talk about with Irvin:
+
     Email servers, need smtp to send email. Idk if they already have one or if they need one. Can use google
+    Show that location managers need to be assigned to location to manage them
+
+
+    Log hours process:
+        Student request to log hours -> Sends email with unique url to location manager -> location manager goes to confirm site which confirms token and user -> sends email to staff member for record then adds hours to student profile
+
+    Location sign up Process:
+
+        Site fills out location sign up form -> request sent to staff who adds to database and assigns manager to location
+        
+    Companies adding opportunities:
+        Need to add a box for them to add a description
+        Need to add a button for them to add an image
+        
+      

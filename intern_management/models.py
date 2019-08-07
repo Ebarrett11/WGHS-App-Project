@@ -6,9 +6,16 @@ from django.contrib.auth.models import User
 class InternshipLocationModel(models.Model):
     address = models.CharField(max_length=400)
     title = models.CharField(max_length=100)
+    manager = models.OneToOneField(User, null=True, on_delete=models.SET_NULL, related_name="+")
+    students = models.ManyToManyField(User)
     description = models.TextField()
-    user = models.ManyToManyField(User)
     contact_email = models.EmailField(default="")
+    outstanding_tokens = models.TextField(null=True)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        permissions = [
+            ('can_confirm', 'User can confirm hours for this location')
+        ]
