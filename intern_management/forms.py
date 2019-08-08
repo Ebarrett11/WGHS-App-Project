@@ -7,7 +7,7 @@ class InternshipSignUpForm(forms.Form):
     location_name = forms.CharField(label="Location Name")
     location_address = forms.CharField(label="Address")
     location_email = forms.EmailField(label="Best Contact Email")
-    location_website = forms.CharField(required=False, label="Location Wesite")
+    location_website = forms.CharField(required=False, label="Location Website")
 
     def send_mail(
             self, context, to_email,
