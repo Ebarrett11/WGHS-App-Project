@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'wghs_intern_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'ENGINE': 'django.contrib.gis.db.backends.sqlite',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -130,8 +130,6 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = "intern_management:details"
 
 LOGIN_URL = "users:login"
-
-SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
