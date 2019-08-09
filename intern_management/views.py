@@ -17,7 +17,7 @@ from .tokens import default_token_generator as token_gen
 
 class InternshipListView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
-    template_name = "intern_management/detail_page.html"
+    template_name = "intern_management/profile_page.html"
     context_object_name = "locations"
     paginate_by = 5
 
