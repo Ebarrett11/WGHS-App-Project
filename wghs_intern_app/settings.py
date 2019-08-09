@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'wghs_intern_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.sqlite',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -133,6 +133,6 @@ LOGIN_URL = "users:login"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-ADMIN_EMAIL = 'test@testing.com'
+ADMIN_EMAIL = "test@testing.com"
 
 URL_EXPIRE_DAYS = 1
