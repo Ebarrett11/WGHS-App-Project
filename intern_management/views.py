@@ -19,16 +19,23 @@ class InternshipListView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
     template_name = "intern_management/profile_page.html"
     context_object_name = "locations"
-    paginate_by = 5
 
     def get_queryset(self):
-        queryset = self.request.user.internshiplocationmodel_set.order_by('title')
+        queryset = self.request.user.internshiplocationmodel_set.order_by(
+            'title'
+        )
         if self.request.GET.get('search'):
             queryset = self.request.user.internshiplocationmodel_set.filter(
                 Q(title__contains=self.request.GET['search'])
                 | Q(description__contains=self.request.GET['search'])
             ).order_by('title')
         return queryset
+
+
+class HomePageView(LoginRequiredMixin, ListView):
+    model = InternshipLocationModel
+    template_name = "intern_management/home.html"
+    context_object_name = "locations"
 
 
 class IntershipLocationDetail(DetailView):
