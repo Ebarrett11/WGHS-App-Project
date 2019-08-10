@@ -3,7 +3,16 @@ from . import views
 
 app_name = "intern_management"
 urlpatterns = [
-    path('', views.InternshipListView.as_view(), name='details'),
+    path(
+        '',
+        views.HomePageView.as_view(),
+        name='home'
+    ),
+    path(
+        'profile/',
+        views.InternshipListView.as_view(),
+        name='profile'
+    ),
     path(
         'location/<int:pk>/',
         views.IntershipLocationDetail.as_view(),

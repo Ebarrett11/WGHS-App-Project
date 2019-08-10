@@ -1,5 +1,5 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
     <meta charset="utf-8">
@@ -14,23 +14,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}"> -->
-    <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+    <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
 </head>
 <body class="d-flex flex-column h-100">
     <header>
@@ -43,10 +28,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'intern_management:home' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="{% url 'intern_management:profile' %}">Profile</a>
                     </li>
                 </ul>
                 {% if searchable %}
@@ -59,13 +44,19 @@
             </div>
         </nav>
     </header>
-
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
-        <div class="container pt-5">
-            {% block content %}
-            {% endblock content %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
         </div>
+        {% endfor %}
+
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
     </main>
 
     <footer class="footer mt-auto py-3">

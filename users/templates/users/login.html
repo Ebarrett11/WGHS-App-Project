@@ -1,19 +1,19 @@
 {% extends "intern_management/base.html" %}
 {% load static %}
 {% block content %}
-<div class="center_box">
-    <div class="logo_small">
-        <img src="{% static 'intern_management/images/logo.png' %}">
-        <p>WGHS Opportunities</p>
+<div class="container pt-5">
+    <div class="card w-50 h-100 mx-auto mt-5">
+        <h5 class="card-header"> Sign In </h5>
+        <div class="card-body">
+            <form class="form-signin" method="POST">
+                {% csrf_token %}
+                <fieldset class="input_fields">
+                    {{ form }}
+                    <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Sign in</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
-    <form method="post">
-        <fieldset class="input_fields">
-            {% csrf_token %}
-            {{ form }}
-        </fieldset>
-        <button type="submit">Login</button>
-    </form>
-    <small class="dulled_text"> Don't already have and account please <a href="{% url 'users:register' %}">Register</a></small>
-    <small><a href="{% url 'users:reset' %}">Forgot your password</a>?</small>
 </div>
+
 {% endblock content %}
