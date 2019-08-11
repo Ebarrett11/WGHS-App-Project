@@ -41,11 +41,13 @@
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
         {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+        <div class="mt-2">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
         {% endif %}
 
         {% block content %}
@@ -55,6 +57,8 @@
     <footer class="footer mt-auto py-3">
         <div class="container">
             <span class="text-muted">Webster Groves High 100 Selma Avenue, Webster Groves, MO 63119 314.963.6400 314.963.6483</span>
+            <br>
+            <small class="text-muted">If you would like to offer a volunteer opportunity, please sign up <a href="{% url 'intern_management:location_sign_up' %}">here</a></small>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -29,7 +29,7 @@ urlpatterns = [
         name='location_log'
     ),
     path(
-        'location/confirmhours/<str:LID>/<str:token>/',
+        'location/confirmhours/<int:pk>/<str:UID>/<str:token>/',
         views.InternshipConfirmHoursView.as_view(),
         name='location_confirm'
     ),

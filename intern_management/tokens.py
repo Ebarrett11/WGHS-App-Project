@@ -39,13 +39,14 @@ class UrlTokenGenerator:
         location_tokens = location.outstanding_tokens
         tokens = location_tokens.split(':')
         token_hash = str(hashlib.sha256(force_bytes(token)).hexdigest())
+        print(token, token_hash)
         if token_hash in tokens:
             tokens.remove(token_hash)
             tokens_serialized = ":".join(tokens)
             location.outstanding_tokens = tokens_serialized
             location.save()
             return True
-
+        print("check failed")
         return False
 
     def _make_hash_value(self, location, salt):

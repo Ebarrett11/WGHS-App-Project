@@ -1,9 +1,9 @@
 {% autoescape off %}
 
 WGHS Internship System
-You are receiving this email because {{ name }} would like to log hours at {{ location }}.
+You are receiving this email because {{ name }} would like to log hours at {{ location.title }}.
 Hours to be Logged: {{ hours }}
 
-Please go to http://{{ domain }}{% url 'intern_management:location_confirm' lid token %}
+Please go to http://{{ domain }}{% url 'intern_management:location_confirm' location.pk uid token %}
 
 {% endautoescape %}
