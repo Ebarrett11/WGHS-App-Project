@@ -37,6 +37,7 @@ class HomePageView(LoginRequiredMixin, ListView):
     template_name = "intern_management/home.html"
     context_object_name = "locations"
 
+<<<<<<< HEAD
     def get_queryset(self):
         if self.request.GET.get('search'):
             queryset = self.request.user.internshiplocationmodel_set.filter(
@@ -46,6 +47,8 @@ class HomePageView(LoginRequiredMixin, ListView):
             return queryset
         return super().get_queryset()
 
+=======
+>>>>>>> a9a2b683f24f21403e057f6da996957a72a846dc
 
 class IntershipLocationDetail(DetailView):
     model = InternshipLocationModel
