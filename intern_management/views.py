@@ -74,13 +74,16 @@ class InternshipSignUpView(FormView):
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
     template_name = 'intern_management/location_hours_log.html'
     form_class = InternshipLogForm
-    success_url = reverse_lazy('intern_management:details')
+    success_url = reverse_lazy('intern_management:home')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         initial = kwargs.get('initial', {})
         initial.update({
-            'locations': self.request.user.internshiplocationmodel_set.order_by('title'),
+            'locations':
+                self.request.user.internshiplocationmodel_set.order_by(
+                    'title'
+                ),
             'pk': self.kwargs.get("pk"),
         })
         kwargs.update({
@@ -118,9 +121,10 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         }
 
         # save token to location
-        location.outstanding_tokens = F('outstanding_tokens') + str(hashlib.sha256(
-            force_bytes(token)
-        ).hexdigest()) + ':'
+        location.outstanding_tokens = F('outstanding_tokens') + str(
+            hashlib.sha256(
+                force_bytes(token)
+            ).hexdigest()) + ':'
         location.save()
 
         # send email to location manager

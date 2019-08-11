@@ -24,13 +24,12 @@ L:
 
     Make better email template hours and email students after their hours are confirmed or denied
 
-    Implement map API
+    Implement map API Map with all locations
 
     Make internship Location Managers more useful
 
     Search by zip code
 
-    Map with all locations
 
     Tagging by content type
 
@@ -39,6 +38,8 @@ L:
     Comment Section
 
     Work available section with User sign up
+
+    Make Better 403 page
 
 
 
