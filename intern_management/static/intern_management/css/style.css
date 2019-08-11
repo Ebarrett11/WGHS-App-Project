@@ -256,7 +256,11 @@
 .search_form input[type='submit']{
     height: 2.3em;
 }
-
+#map{
+    margin-top: 3em;
+    height: 50vh;
+    width: 100%;
+}
 
 /* Testing Grid */
 

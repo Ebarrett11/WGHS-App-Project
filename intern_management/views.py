@@ -118,7 +118,7 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         }
 
         # save token to location
-        location.outstanding_tokens += str(hashlib.sha256(
+        location.outstanding_tokens = F('outstanding_tokens') + str(hashlib.sha256(
             force_bytes(token)
         ).hexdigest()) + ':'
         location.save()
