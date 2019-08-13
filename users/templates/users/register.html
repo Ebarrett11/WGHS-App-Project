@@ -3,10 +3,7 @@
 {% block content %}
 <div class="center_box">
     {{ form.non_field_errors }}
-    <div class="logo_small">
-        <img src="{% static 'intern_management/images/logo.png' %}">
-        <p>WGHS Opportunities</p>
-    </div>
+    <h4>Register</h4>
     <form method="post">
         {% csrf_token %}
         <fieldset class="input_fields">
@@ -22,7 +19,7 @@
             </div>
             {% endfor %}
         </fieldset>
-        <button type="submit">Register</button>
+        <button type="submit" class="btn btn-info">Register</button>
     </form>
     <small class="dulled_text">Already have an account? <a id="login-back" href="{% url 'users:login' %}"> Login</a></small>
 </div>
