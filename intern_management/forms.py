@@ -1,6 +1,7 @@
 from django import forms
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class InternshipSignUpForm(forms.Form):
@@ -38,7 +39,10 @@ class InternshipLogForm(forms.Form):
         empty_label="--Select Location--",
     )
     name = forms.CharField(label="Your Name")
-    hours = forms.IntegerField(label="Hours to Log")
+    hours = forms.IntegerField(label="Hours to Log", validators=[
+        MinValueValidator(1),
+        MaxValueValidator(24)
+    ])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

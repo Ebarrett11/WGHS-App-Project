@@ -12,7 +12,7 @@ class InternshipAdmin(admin.ModelAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ('title', 'address', 'manager')
+            'fields': ('title', 'address', 'manager', 'tags')
         }),
         ('Description', {
             'classes': ['wide'],

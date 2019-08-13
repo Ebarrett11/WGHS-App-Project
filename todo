@@ -1,44 +1,30 @@
 
 E:
 
-    Design the account, and suggest page
-
-    Add in a way to suggest companies (most likely in the footer)
-
-
     Comment all code so it's maintainable as well as write up docs for it
 
-    Make printouts for DR IRVING
-
-    Google Form
-
-    Make links buttons on detail page (class= button)
+    Make better email template hours and email students after their hours are confirmed or denied
 
 
 
 
 L:
-    Finish Location Sign Up page and Log hours page functionality
+    Finish Log hours page functionality
 
-    Fix User problem with Log hours page
+    Implement map API Map with all locations
 
-    Make better email template hours and email students after their hours are confirmed or denied
-
-    Implement map API
-
-    Make internship Location Managers more useful
+    Finish Location Manager functionality (should be able to edit locations they have permission to edit)
 
     Search by zip code
-
-    Map with all locations
-
-    Tagging by content type
 
     Browse all locations to sign up
 
     Comment Section
 
-    Work available section with User sign up
+    Work available section with User sign up on location detail page
+
+    Add more options to home page search e.g make search able to search by tags
+
 
 
 

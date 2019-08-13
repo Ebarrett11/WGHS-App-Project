@@ -1,51 +1,68 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% if title %}
+    <title> WGHS Intern Management App - {{ title }}</title>
+    {% else %}
+    <title> WGHS Intern Management App</title>
+    {% endif %}
 
-        {% if title %}
-        <title> WGHS Intern Management App - {{ title }}</title>
-        {% else %}
-        <title> WGHS Intern Management App</title>
-        {% endif %}
-        <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
-    </head>
-    <body>
-        <div class="banner">
-            <h2 class="logo_large">Logo</h2>
-            {% if user.is_authenticated %}
-            <div class="container">
-                <a>Signed In: {{ user|upper }}</a>
-                <a href="{% url 'intern_management:details' %}">Internships</a>
-                <a href="{% url 'users:profile' %}">Profile</a>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'intern_management/css/style.css' %}">
+    {% block head %}{% endblock head %}
+</head>
+<body class="d-flex flex-column h-100">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Webster Groves</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'intern_management:home' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'intern_management:profile' %}">Profile</a>
+                    </li>
+                </ul>
+
             </div>
-            {% else %}
-            <div class="container">
-                <a href="{% url 'users:login' %}">login</a>
-                <a href="{% url 'users:register' %}">register</a>
-            </div>
-            {% endif %}
-        </div>
+        </nav>
+    </header>
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
         {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                <div class="message-{{ message.tags }}">
-                    <p>{{ message }}</p>
-                </div>
-                {% endfor %}
+        <div class="mt-2">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
             </div>
-        {% endif %}
-        <div class="content">
-            {% block content %}
-            {% endblock %}
+            {% endfor %}
         </div>
-        <footer>
-            <h2>Webster Groves High</h2>
-            <p>100 Selma Avenue, Webster Groves, MO 63119</p>
-            <p>314.963.6400 314.963.6483</p>
-        </footer>
-    </body>
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">Webster Groves High 100 Selma Avenue, Webster Groves, MO 63119 314.963.6400 314.963.6483</span>
+            <br>
+            <small class="text-muted">If you would like to offer a volunteer opportunity, please sign up <a href="{% url 'intern_management:location_sign_up' %}">here</a></small>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

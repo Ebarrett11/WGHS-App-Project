@@ -1,7 +1,4 @@
-Atom
-Django 
-Python 3.7+
-argon2
-Mapzen
-
-currently removed: spaciaLite, GDAL
+Django 2.1.10
+Python 3
+Leaflet Js
+OpenStreetMap

@@ -1,19 +1,14 @@
 {% extends "intern_management/base.html" %}
-{% load static %}
 {% block content %}
-<div class="center_box">
-    <div class="logo_small">
-        <img src="{% static 'intern_management/images/logo.png' %}">
-        <p>WGHS Opportunities</p>
+<div class="container text-center">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h2>Location Sign Up Form</h2>
+        <small>&#42;Please fill out this form in it's entirety</small>
     </div>
-    <form method="post">
-        <center><h4>Add your internship location to our database!</h4></center>
-        <fieldset class="input_fields">
-            {% csrf_token %}
-            {{ form }}
-        </fieldset>
-        <button type="submit">Send Info</button>
-    </form>
-</div>
+    <div class="container">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfizQXDY7jgkONRjWLtyVrnIYn_5xh84cvuH11PobOAct3gzA/viewform?embedded=true" width="640" height="2070" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
 
+</div>
 {% endblock content %}

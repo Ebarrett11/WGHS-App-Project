@@ -1,8 +1,9 @@
 {% extends "intern_management/base.html" %}
 {% block content %}
+<div class="container pt-5">
     <div class="center_box">
-        <h3> You are logged out. Thanks for visiting!</h3>
-        <a href="{% url 'users:login' %}"> Log back in?</a>
+        <h3 class="card-text"> You are logged out. Thanks for visiting!</h3>
+        <a class="mt-2 " href="{% url 'users:login' %}">Log back in?</a>
     </div>
-
+</div>
 {% endblock content %}

@@ -1,17 +1,22 @@
 {% extends "intern_management/base.html" %}
 {% load static %}
 {% block content %}
-<div class="profile-site">
-    <div class="container_row">
-        <img class="location_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
-        <div class="container_description">
-            <h1>{{ location.title }}</h1>
-            <p> {{ location.description }} </p>
+<div class="container-fluid p-4 p-md-5 text-white bg-dark">
+    <div class="row">
+        <div class="col-lg px-0">
+            <h1 class="display-4 font-italic">{{ location.title }}</h1>
+            <p class="lead my-3">{{ location.description }}</p>
+            <p class="lead mb-0">Address: {{ location.address }}</p>
+            <p class="lead mb-0">Tags: {{ location.tags }}</p>
+        </div>
+        <div class="col-lg p-2">
+            <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F9%2F95%2FCatVibrissaeFullFace.JPG%2F1200px-CatVibrissaeFullFace.JPG&f=1" alt="" width="100%" class="rounded">
         </div>
     </div>
-    <!-- Place for maps to go -->
-    <div style=" background: black; width: 100%; height: 90vh; margin-top: 2em;">
+    <div class="container-fluid">
+        <!-- Comment Section -->
     </div>
 </div>
+
 
 {% endblock content %}
