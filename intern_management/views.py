@@ -1,5 +1,5 @@
 import hashlib
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import ListView, DetailView, FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -145,8 +145,14 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
         decoded_url = urlsafe_base64_decode(self.kwargs['UID']).split(b':')
         context = super().get_context_data(**kwargs)
         context.setdefault('location', location.title)
-        context.setdefault('name', get_object_or_404(User, pk=int(decoded_url[0])))
+        context.setdefault('name', get_object_or_404(
+            User, pk=int(decoded_url[0])
+        ))
         return context
+
+    def post(self, request, **kwargs):
+        # need to put logging hours logic here
+        return redirect('intern_management:home')
 
     def test_func(self):
         # """

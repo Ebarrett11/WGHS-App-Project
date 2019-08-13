@@ -5,7 +5,7 @@ E:
 
     Make better email template hours and email students after their hours are confirmed or denied
 
-    Finish Log hours page functionality
+    Finish Log hours page functionality(All database storage is done, needs post data logic in view)
 
     Comment Section
 
@@ -20,12 +20,9 @@ L:
 
     Browse all locations to sign up
 
-
     Work available section with User sign up on location detail page
 
     Add more options to home page search e.g make search able to search by tags
-
-
 
 
 Things to talk about with Irvin:
