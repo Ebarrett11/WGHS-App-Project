@@ -63,7 +63,7 @@
 {% endif %}
 </div>
 </div> -->
-<section class="container-fluid p-5 text-center text-light" style="background: rgb(138,43,226); ">
+<section class="container-fluid p-5 text-center text-light" style="background: rgb(51, 102, 153); ">
     <div class="container mt-5">
         <div class="row mb-4 align-items-center justify-content-center">
             <img src="http://www.funlava.com/wp-content/uploads/2013/03/cute-kitten-cats-6987468-670-5782.jpg" style="height: 70px; width: 70px; border-radius: 50%;" class="mr-4">
@@ -84,7 +84,7 @@
                         <p class="card-text">{{ location.description|truncatewords:30 }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_details' location.pk %}">View</a></button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_log' location.pk%}"> Log Hours</a></button>
                             </div>
                         </div>

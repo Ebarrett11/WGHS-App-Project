@@ -38,6 +38,7 @@ class HomePageView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
     template_name = "intern_management/home.html"
     context_object_name = "locations"
+    paginate_by = 10
 
     def get_queryset(self):
         if self.request.GET.get('search'):

@@ -76,7 +76,7 @@ crossorigin=""></script>
                     <p class="card-text">{{ location.description|truncatewords:30 }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_details' location.pk %}">View</a></button>
                         </div>
                     </div>
                 </div>
@@ -89,15 +89,37 @@ crossorigin=""></script>
         </div>
         {% endif %}
     </div>
+    <div class="container-fluid text-center">
+        {% if is_paginated %}
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="margin-link">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="margin-link">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a href="?page={{ num }}" class="margin-link">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3'%}
+        <a href="?page={{ num }}" class="margin-link">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="margin-link">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="margin-link">Last</a>
+        {% endif %}
+        {% endif %}
+    </div>
+
 </div>
 
 <!-- Begin map content -->
 <div id="map"></div>
 
 <script>
-var map = L.map('map').setView([51.505,-0.09], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+    var map = L.map('map').setView([51.505,-0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 </script>
 {% endblock %}
