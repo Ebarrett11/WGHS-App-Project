@@ -5,11 +5,12 @@ E:
 
     Make better email template hours and email students after their hours are confirmed or denied
 
+    Finish Log hours page functionality
 
+    Comment Section
 
 
 L:
-    Finish Log hours page functionality
 
     Implement map API Map with all locations
 
@@ -19,7 +20,6 @@ L:
 
     Browse all locations to sign up
 
-    Comment Section
 
     Work available section with User sign up on location detail page
 
