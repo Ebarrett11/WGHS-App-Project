@@ -5,11 +5,7 @@ E:
 
     Make better email template hours and email students after their hours are confirmed or denied
 
-<<<<<<< HEAD
     Finish Log hours page functionality (All database storage is done, needs post data logic in view)
-=======
-    Finish Log hours page functionality(All database storage is done, needs post data logic in view)
->>>>>>> 45646bcc08d017f48f6a36746b7b4061a9b35772
 
     Comment Section
 
