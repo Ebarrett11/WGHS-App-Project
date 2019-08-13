@@ -7,13 +7,10 @@ class InternshipLocationModel(models.Model):
         Description:
             Model describing a valid internship location
 
-        Arguments:
-
     """
     address = models.CharField(max_length=400)
     title = models.CharField(max_length=100)
-    managers = models.ManyToManyField(User,
-                                     related_name="+")
+    managers = models.ManyToManyField(User, related_name="+")
     students = models.ManyToManyField(User)
     description = models.TextField()
     contact_email = models.EmailField(default="")
@@ -31,11 +28,10 @@ class LoggedHoursModel(models.Model):
         Description:
             Model describing logged hours for a certain location
 
-        Arguments:
-
     """
     total_hours = models.IntegerField(default=0)
-    location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
+    location = models.ForeignKey(InternshipLocationModel,
+                                 on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
