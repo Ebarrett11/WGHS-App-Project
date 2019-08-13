@@ -1,13 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
 
 
 class InternshipLocationModel(models.Model):
+    """
+        Description:
+            Model describing a valid internship location
+
+        Arguments:
+
+    """
     address = models.CharField(max_length=400)
     title = models.CharField(max_length=100)
-    manager = models.OneToOneField(User, null=True,
-                                   on_delete=models.SET_NULL, related_name="+")
+    managers = models.ManyToManyField(User,
+                                     related_name="+")
     students = models.ManyToManyField(User)
     description = models.TextField()
     contact_email = models.EmailField(default="")
@@ -18,3 +24,19 @@ class InternshipLocationModel(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class LoggedHoursModel(models.Model):
+    """
+        Description:
+            Model describing logged hours for a certain location
+
+        Arguments:
+
+    """
+    total_hours = models.IntegerField(default=0)
+    location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Logged Hours for " + self.user.username
