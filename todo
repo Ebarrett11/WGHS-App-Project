@@ -13,8 +13,6 @@ E:
 
 L:
 
-    Finish updating token validation
-
     Implement map API Map with all locations
 
     Search by zip code
