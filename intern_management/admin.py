@@ -19,7 +19,7 @@ class InternshipAdmin(admin.ModelAdmin):
     inlines = [LoggedHoursInline]
     fieldsets = [
         (None, {
-            'fields': ('title', 'address', 'managers', 'tags')
+            'fields': ('title', 'address', 'managers', 'tags', 'outstanding_tokens')
         }),
         ('Description', {
             'classes': ['wide'],

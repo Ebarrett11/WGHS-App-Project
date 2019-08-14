@@ -27,25 +27,24 @@ class UrlTokenGenerator:
         Check that a password reset token is correct for a given user.
         """
         if not (token and location):
+            print("Didn't give enough info")
             return False
         # validate token timestamp
         if not constant_time_compare(
             self.make_token(location, request),
             token
         ):
+            print("Token failed to compare")
             return False
 
         # loop through locations valid tokens and compare them to given token
         location_tokens = location.outstanding_tokens
+        print(location_tokens)
         tokens = location_tokens.split(':')
         token_hash = str(hashlib.sha256(force_bytes(token)).hexdigest())
-        if token_hash in tokens:
-            tokens.remove(token_hash)
-            tokens_serialized = ":".join(tokens)
-            location.outstanding_tokens = tokens_serialized
-            location.save()
-            return True
-        return False
+        if token_hash not in tokens:
+            return False
+        return True
 
     def _make_hash_value(self, location, request):
         """

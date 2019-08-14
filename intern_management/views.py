@@ -161,34 +161,45 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
             pk=urlsafe_base64_decode(kwargs['request_id']).decode()
         )
         request.is_valid = True
+
+        # invalidate Token
+        location = request.location
+        location_tokens = request.location.outstanding_tokens
+        tokens = location_tokens.split(':')
+        token_hash = str(hashlib.sha256(force_bytes(kwargs['token'])).hexdigest())
+        tokens.remove(token_hash)
+        tokens_serialized = ":".join(tokens)
+        location.outstanding_tokens = tokens_serialized
+        location.save()
         request.save()
+
+        # Give success message
         messages.success(self.request, "Logged Hours Confirmed Successfully")
         return redirect('intern_management:home')
 
     def test_func(self):
-        # """
-        #     Must return True for user to access view
-        #
-        #     Requirements:
-        #         User must have valid Url token
-        #             token must be used within allocated time
-        #             token must be part of token list on database location
-        #         User must be logged in as Manager for that location
-        # """
-        # # Get req info from request and Url
-        # request = get_object_or_404(
-        #     LoggedHoursModel,
-        #     pk=urlsafe_base64_decode(kwargs['request_id']).decode()
-        # )
-        # location = request.location
-        # # Validate Token
-        # if token_gen.check_token(location,
-        #                          salt, token):
-        #     if user == location.manager:
-        #         return True
-        #
-        # # If token fails return False
-        # else:
-        #     print("Token Validation fail")
-        #     return False
-        return True
+        """
+            Must return True for user to access view
+
+            Requirements:
+                User must have valid Url token
+                    token must be used within allocated time
+                    token must be part of token list on database location
+                User must be logged in as Manager for that location
+        """
+        # Get req info from request and Url
+        request = get_object_or_404(
+            LoggedHoursModel,
+            pk=urlsafe_base64_decode(self.kwargs['request_id']).decode()
+        )
+        token = self.kwargs["token"]
+        location = request.location
+        # Validate Token
+        if token_gen.check_token(location,
+                                 request, token):
+            # if self.request.user in request.location.managers:
+            return True
+
+        # If token fails return False
+        else:
+            return False

@@ -15,7 +15,7 @@ class InternshipLocationModel(models.Model):
     description = models.TextField()
     contact_email = models.EmailField(default="")
     # colon deliminated list of hashed valid tokens (Not to be shown to users)
-    outstanding_tokens = models.TextField(null=True)
+    outstanding_tokens = models.TextField(null=True, blank=True)
     # comma deliminated list of tags that apply to this location
     tags = models.TextField(null=True)
 
