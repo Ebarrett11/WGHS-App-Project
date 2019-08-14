@@ -13,16 +13,16 @@ class UrlTokenGenerator:
     key_salt = "WGHS.IntershipManagement.App"
     secret = settings.SECRET_KEY
 
-    def make_token(self, location, salt):
+    def make_token(self, location, request):
         hash = salted_hmac(
             self.key_salt,
-            self._make_hash_value(location, salt),
+            self._make_hash_value(location, request),
             secret=self.secret,
         ).hexdigest()[::2]  # Limit to 20 characters to shorten the URL.
 
         return hash
 
-    def check_token(self, location, salt, token):
+    def check_token(self, location, request, token):
         """
         Check that a password reset token is correct for a given user.
         """
@@ -30,7 +30,7 @@ class UrlTokenGenerator:
             return False
         # validate token timestamp
         if not constant_time_compare(
-            self.make_token(location, salt),
+            self.make_token(location, request),
             token
         ):
             return False
@@ -39,17 +39,15 @@ class UrlTokenGenerator:
         location_tokens = location.outstanding_tokens
         tokens = location_tokens.split(':')
         token_hash = str(hashlib.sha256(force_bytes(token)).hexdigest())
-        print(token, token_hash)
         if token_hash in tokens:
             tokens.remove(token_hash)
             tokens_serialized = ":".join(tokens)
             location.outstanding_tokens = tokens_serialized
             location.save()
             return True
-        print("check failed")
         return False
 
-    def _make_hash_value(self, location, salt):
+    def _make_hash_value(self, location, request):
         """
         Hash the user's primary key and some user state that's sure to change
         after a password reset to produce a token that invalidated when it's
@@ -64,11 +62,14 @@ class UrlTokenGenerator:
         Running this data through salted_hmac() prevents password cracking
         attempts using the reset token, provided the secret isn't compromised.
         """
-        creation_timestamp = timezone.now().date() + timedelta(days=settings.URL_EXPIRE_DAYS)
+        creation_timestamp = timezone.now().date() + timedelta(
+            days=settings.URL_EXPIRE_DAYS
+        )
         return (
                location.title
                + str(creation_timestamp)
-               + salt
+               + request.id
+               + str(request.is_valid)
         )
 
 

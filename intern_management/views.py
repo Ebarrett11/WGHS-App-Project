@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
 from .forms import InternshipSignUpForm, InternshipLogForm
-from .models import InternshipLocationModel
+from .models import InternshipLocationModel, LoggedHoursModel
 from .tokens import default_token_generator as token_gen
 # Create your views here.
 
@@ -98,27 +98,30 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         import string
         import random
-        salt = ''.join(
+
+        location = form.cleaned_data['location']
+
+        request_id = ''.join(
             random.SystemRandom().choice(
                 string.ascii_letters + string.digits
             ) for _ in range(10)
         )
-        location = form.cleaned_data['location']
+        request = location.loggedhoursmodel_set.create(
+            id=request_id, total_hours=form.cleaned_data['hours'],
+            is_valid=False, user=self.request.user
+        )
         token = token_gen.make_token(
             location,
-            salt
+            request
         )
-
         # context for email to be sent
         context = {
             'name': form.cleaned_data['name'],
             'location': location,
             'hours': form.cleaned_data['hours'],
             'domain': get_current_site(self.request),
-            'uid': urlsafe_base64_encode(
-                force_bytes(self.request.user.pk)
-                + b':'
-                + force_bytes(salt)
+            'request_id': urlsafe_base64_encode(
+                force_bytes(request.id)
             ).decode(),
             'token': token,
         }
@@ -128,6 +131,7 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             hashlib.sha256(
                 force_bytes(token)
             ).hexdigest()) + ':'
+
         location.save()
 
         # send email to location manager
@@ -141,17 +145,24 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
     template_name = "intern_management/location_hours_confirm.html"
 
     def get_context_data(self, **kwargs):
-        location = get_object_or_404(InternshipLocationModel, pk=kwargs['pk'])
-        decoded_url = urlsafe_base64_decode(self.kwargs['UID']).split(b':')
+        request = get_object_or_404(
+            LoggedHoursModel,
+            pk=urlsafe_base64_decode(kwargs['request_id']).decode()
+        )
         context = super().get_context_data(**kwargs)
-        context.setdefault('location', location.title)
-        context.setdefault('name', get_object_or_404(
-            User, pk=int(decoded_url[0])
-        ))
+        context.setdefault('location', request.location.title)
+        context.setdefault('name', request.user.username)
         return context
 
-    def post(self, request, **kwargs):
+    def post(self, *args, **kwargs):
         # need to put logging hours logic here
+        request = get_object_or_404(
+            LoggedHoursModel,
+            pk=urlsafe_base64_decode(kwargs['request_id']).decode()
+        )
+        request.is_valid = True
+        request.save()
+        messages.success(self.request, "Logged Hours Confirmed Successfully")
         return redirect('intern_management:home')
 
     def test_func(self):
@@ -165,14 +176,11 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
         #         User must be logged in as Manager for that location
         # """
         # # Get req info from request and Url
-        # user = self.request.user
-        # decoded_url = urlsafe_base64_decode(self.kwargs['UID'])
-        # params = tuple(decoded_url.split(b':'))
-        # location = InternshipLocationModel.objects.get(
-        #     pk=kwargs['pk']
+        # request = get_object_or_404(
+        #     LoggedHoursModel,
+        #     pk=urlsafe_base64_decode(kwargs['request_id']).decode()
         # )
-        # salt = params[1].decode()
-        # token = self.kwargs['token']
+        # location = request.location
         # # Validate Token
         # if token_gen.check_token(location,
         #                          salt, token):

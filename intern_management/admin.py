@@ -6,8 +6,8 @@ admin.site.site_header = "WGHS Internship Management"
 
 class LoggedHoursInline(admin.TabularInline):
     model = LoggedHoursModel
-    fields = ('user', 'total_hours')
-    readonly_fields = ("user",)
+    fields = ("id", "user", "total_hours", "is_valid")
+    can_delete = True
     extra = 0
 
 
