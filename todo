@@ -1,29 +1,29 @@
 
 E:
 
-    Comment all code so it's maintainable as well as write up docs for it
-
     Make better email template hours and email students after their hours are confirmed or denied
-
-    Finish Log hours page functionality (All database storage is done, needs post data logic in view)
 
     Comment Section
 
+    Profile needs to display all valid logged hours
+
+    Comment all code so it's maintainable as well as write up docs for it
+
+    Browse all locations and sign up option
 
 L:
 
+    Finish updating token validation
+
     Implement map API Map with all locations
 
-    Finish Location Manager functionality (should be able to edit locations they have permission to edit)
-
     Search by zip code
-
-    Browse all locations to sign up
 
     Work available section with User sign up on location detail page
 
     Add more options to home page search e.g make search able to search by tags
 
+    Finish Location Manager functionality (should be able to edit locations they have permission to edit)
 
 Things to talk about with Irvin:
 
