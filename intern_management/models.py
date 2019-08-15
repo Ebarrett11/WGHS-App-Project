@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class InternshipLocationModel(models.Model):
@@ -21,6 +22,14 @@ class InternshipLocationModel(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse(
+            'intern_management:location_details',
+            kwargs={
+                "pk": self.pk
+            }
+        )
 
 
 class LoggedHoursModel(models.Model):

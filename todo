@@ -12,6 +12,7 @@ E:
     Browse all locations and sign up option
 
 L:
+    Write Tests for all Django code
 
     Implement map API Map with all locations
 
@@ -25,12 +26,12 @@ L:
 
 Things to talk about with Irvin:
 
-    Email servers, need smtp to send email. Idk if they already have one or if they need one. Can use google
+    Email servers, need SMTP to send email. Idk if they already have one or if they need one. Can use google
     Show that location managers need to be assigned to location to manage them
 
 
     Log hours process:
-        Student request to log hours -> Sends email with unique url to location manager -> location manager goes to confirm site which confirms token and user -> sends email to staff member for record then adds hours to student profile
+        Student request to log hours -> Sends email with unique url to location manager -> location manager goes to confirm site which confirms token and user -> sends email to staff member for record then validates hours to student profile
 
     Location sign up Process:
         Site fills out location sign up form -> request sent to staff who adds to database and assigns manager to location
