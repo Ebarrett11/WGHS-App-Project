@@ -5,13 +5,11 @@ from django.views.generic import ListView, DetailView, FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.db.models import Q
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from django.conf import settings
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
-from .forms import InternshipSignUpForm, InternshipLogForm
+from .forms import InternshipLogForm
 from .models import InternshipLocationModel, LoggedHoursModel
 from .tokens import default_token_generator as token_gen
 # Create your views here.
@@ -56,22 +54,8 @@ class IntershipLocationDetail(DetailView):
     context_object_name = "location"
 
 
-class InternshipSignUpView(FormView):
+class InternshipSignUpView(TemplateView):
     template_name = 'intern_management/location_sign_up.html'
-    form_class = InternshipSignUpForm
-    success_url = reverse_lazy('users:login')
-
-    def form_valid(self, form):
-        context = {
-            'name': form.cleaned_data['location_name'],
-            'address': form.cleaned_data['location_address'].title,
-            'website': form.cleaned_data['location_website'],
-            'email': form.cleaned_data['location_email'],
-        }
-
-        form.send_mail(context, settings.ADMIN_EMAIL)
-        messages.success(self.request, 'Request Submitted Successfully')
-        return super().form_valid(form)
 
 
 class InternshipLogHoursView(LoginRequiredMixin, FormView):
