@@ -1,5 +1,6 @@
 import hashlib
 from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import ListView, DetailView, FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -10,7 +11,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
 from .forms import InternshipLogForm
-from .models import InternshipLocationModel, LoggedHoursModel
+from .models import (
+    InternshipLocationModel, LoggedHoursModel, CommentModel
+)
 from .tokens import default_token_generator as token_gen
 # Create your views here.
 
@@ -52,6 +55,22 @@ class IntershipLocationDetail(DetailView):
     model = InternshipLocationModel
     template_name = "intern_management/location.html"
     context_object_name = "location"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.setdefault("comments", kwargs['object'].commentmodel_set.all())
+        return context
+
+    def post(self, *args, **kwargs):
+        CommentModel.objects.create(
+            user=self.request.user,
+            location=get_object_or_404(
+                InternshipLocationModel, pk=kwargs['pk']
+            ),
+            text=self.request.POST['text'],
+            date_posted=timezone.now()
+        )
+        return redirect("intern_management:location_details", pk=kwargs['pk'])
 
 
 class InternshipSignUpView(TemplateView):
