@@ -12,28 +12,11 @@ from django.utils.encoding import force_bytes
 
 from .forms import InternshipLogForm
 from .models import (
-    InternshipLocationModel, LoggedHoursModel, CommentModel
+    InternshipLocationModel, LoggedHoursModel, CommentModel,
+    AvailableWorkModel
 )
 from .tokens import default_token_generator as token_gen
 # Create your views here.
-
-
-class InternshipListView(LoginRequiredMixin, ListView):
-    model = InternshipLocationModel
-    template_name = "intern_management/profile_page.html"
-    context_object_name = "locations"
-
-    def get_queryset(self):
-        queryset = self.request.user.internshiplocationmodel_set.order_by(
-            'title'
-        )
-        if self.request.GET.get('search'):
-            queryset = self.request.user.internshiplocationmodel_set.filter(
-                Q(title__contains=self.request.GET['search'])
-                | Q(description__contains=self.request.GET['search'])
-            ).order_by('title')
-        return queryset
-
 
 class HomePageView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
@@ -50,6 +33,32 @@ class HomePageView(LoginRequiredMixin, ListView):
             return queryset
         return super().get_queryset()
 
+class AvailableWorkView(LoginRequiredMixin, ListView):
+    model = AvailableWorkModel
+    template_name = "intern_management/available_work.html"
+
+    def get_queryset(self):
+        location = get_object_or_404(InternshipLocationModel, pk=self.kwargs['pk'])
+        queryset = AvailableWorkModel.objects.filter(
+            location=location
+        )
+        return queryset
+
+class InternshipListView(LoginRequiredMixin, ListView):
+    model = InternshipLocationModel
+    template_name = "intern_management/profile_page.html"
+    context_object_name = "locations"
+
+    def get_queryset(self):
+        queryset = self.request.user.internshiplocationmodel_set.order_by(
+            'title'
+        )
+        if self.request.GET.get('search'):
+            queryset = self.request.user.internshiplocationmodel_set.filter(
+                Q(title__contains=self.request.GET['search'])
+                | Q(description__contains=self.request.GET['search'])
+            ).order_by('title')
+        return queryset
 
 class IntershipLocationDetail(DetailView):
     model = InternshipLocationModel

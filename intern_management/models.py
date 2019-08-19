@@ -34,7 +34,7 @@ class InternshipLocationModel(models.Model):
     def get_total_hours(self, user):
         total_hours = 0
         for hours in user.loggedhoursmodel_set.all():
-            if hours.location == self:
+            if hours.location == self and hours.is_valid:
                 total_hours += hours.total_hours
         return total_hours
 
@@ -60,9 +60,15 @@ class LoggedHoursModel(models.Model):
 # add models to database
 class CommentModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField(unique=False)
+    text = models.TextField()
     location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
     date_posted = models.DateTimeField()
 
     def __str__(self):
         return "Comment by {user}".format(user=self.user.username)
+
+class AvailableWorkModel(models.Model):
+    location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=200)
+    text = models.TextField()
+    contact_email = models.CharField(max_length=30)

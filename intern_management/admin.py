@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (
-    InternshipLocationModel, LoggedHoursModel, CommentModel
+    InternshipLocationModel, LoggedHoursModel, CommentModel,
+    AvailableWorkModel
 )
 # Register your models here.
 admin.site.site_header = "WGHS Internship Management"
@@ -12,13 +13,17 @@ class LoggedHoursInline(admin.TabularInline):
     can_delete = True
     extra = 0
 
-
 class CommentInline(admin.TabularInline):
     model = CommentModel
     fields = ("user", "text", "date_posted")
     can_delete = True
     extra = 0
 
+class CommentInline(admin.TabularInline):
+    model = AvailableWorkModel
+    fields = ("text", "date_posted")
+    can_delete = True
+    extra = 0
 
 @admin.register(InternshipLocationModel)
 class InternshipAdmin(admin.ModelAdmin):
