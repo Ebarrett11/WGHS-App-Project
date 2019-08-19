@@ -20,6 +20,7 @@ class InternshipLocationModel(models.Model):
     # comma deliminated list of tags that apply to this location
     tags = models.TextField(null=True)
 
+
     def __str__(self):
         return self.title
 
@@ -47,3 +48,15 @@ class LoggedHoursModel(models.Model):
 
     def __str__(self):
         return "Logged Hours for " + self.user.username
+
+
+# command: python manage.py makemigrations; python manage.py migrate
+# add models to database
+class CommentModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(unique=False)
+    location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
+    date_posted = models.DateTimeField()
+
+    def __str__(self):
+        return "Comment by {user}".format(user=self.user.username)

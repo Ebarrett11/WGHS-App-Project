@@ -13,10 +13,39 @@
             <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F9%2F95%2FCatVibrissaeFullFace.JPG%2F1200px-CatVibrissaeFullFace.JPG&f=1" alt="" width="100%" class="rounded">
         </div>
     </div>
-    <div class="container-fluid">
-        <!-- Comment Section -->
+</div>
+<div class="container-fluid p-3">
+    <!-- Comment Section -->
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="container my-2" style="border: 1px solid #ccc;">
+                <div class="row p-4">
+                    <div class="col-md-1">
+                        {{ comment.user.username }}
+                    </div>
+                    <div class="col-md">
+                        {{ comment.text }}
+                    </div>
+                </div>
+                <div class="row p-4 w-100">
+                    <div class="col-md">
+                        {{ comment.date_posted }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="container p-3">
+        <div class="row ">
+            <form method="post">
+                {% csrf_token %}
+                <p class="m-0 py-1">Give your feedback:</p>
+                <textarea class="w-100 p-3" name="text" rows="8" cols="80" placeholder="Type Feedback Here"></textarea>
+                <button class="btn btn-dark btn-md mt-2" type="submit">Submit Feedback</button>
+            </form>
+        </div>
     </div>
 </div>
-
 
 {% endblock content %}
