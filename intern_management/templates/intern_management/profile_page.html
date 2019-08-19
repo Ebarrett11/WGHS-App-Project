@@ -93,10 +93,8 @@ to view (an enlarged form) and log hours for the locations -->
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_details' location.pk %}">View</a></button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_log' location.pk%}"> Log Hours</a></button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_log' location.pk %}"> Log Hours</a></button>
                             </div>
-                        </div>
-                        <div class="container">
                         </div>
                     </div>
                 </div>
@@ -105,4 +103,5 @@ to view (an enlarged form) and log hours for the locations -->
         </div>
     </div>
 </div>
+
 {% endblock content %}

@@ -16,11 +16,21 @@
         </div>
     </div>
 </div>
-<div class="container-fluid p-3">
+{% if is_enrolled %}
+    <div class="container-fluid my-4 p-5">
+        <h4>Total Logged Hours: </h4>
+        <hr>
+        <p>{{ total_hours }}</p>
+    </div>
+{% endif %}
+
+<div class="container-fluid p-5">
+    <h4>User comments</h4>
+    <hr>
     <!-- Comment Section -->
     {% if comments %}
         {% for comment in comments %}
-            <div class="container my-2" style="border: 1px solid #ccc;">
+            <div class="container-fluid my-3 rounded" style="border: 1px solid #ccc;">
                 <div class="row p-4">
                     <div class="col-md-1">
                         {{ comment.user.username }}
@@ -28,21 +38,24 @@
                     <div class="col-md">
                         {{ comment.text }}
                     </div>
-                </div>
-                <div class="row p-4 w-100">
-                    <div class="col-md">
-                        {{ comment.date_posted }}
+                    <div class="col-md-2">
+                        <small class="text-muted">{{ comment.date_posted }}</small>
                     </div>
                 </div>
             </div>
         {% endfor %}
+    {% else %}
+        <div class="container">
+            <h3>No one has given feedback here :(</h3>
+            <p>please leave a review of your experience</p>
+        </div>
     {% endif %}
 
     <div class="container p-3">
         <div class="row ">
             <form method="post">
                 {% csrf_token %}
-                <p class="m-0 py-1">Give your feedback:</p>
+                <p class="m-0 py-1">Leave your feedback:</p>
                 <textarea class="w-100 p-3" name="text" rows="8" cols="80" placeholder="Type Feedback Here"></textarea>
                 <button class="btn btn-dark btn-md mt-2" type="submit">Submit Feedback</button>
             </form>

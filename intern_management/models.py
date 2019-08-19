@@ -20,7 +20,6 @@ class InternshipLocationModel(models.Model):
     # comma deliminated list of tags that apply to this location
     tags = models.TextField(null=True)
 
-
     def __str__(self):
         return self.title
 
@@ -31,6 +30,13 @@ class InternshipLocationModel(models.Model):
                 "pk": self.pk
             }
         )
+
+    def get_total_hours(self, user):
+        total_hours = 0
+        for hours in user.loggedhoursmodel_set.all():
+            if hours.location == self:
+                total_hours += hours.total_hours
+        return total_hours
 
 
 class LoggedHoursModel(models.Model):

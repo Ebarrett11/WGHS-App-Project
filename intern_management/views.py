@@ -57,8 +57,17 @@ class IntershipLocationDetail(DetailView):
     context_object_name = "location"
 
     def get_context_data(self, **kwargs):
+        location = kwargs['object']
         context = super().get_context_data(**kwargs)
-        context.setdefault("comments", kwargs['object'].commentmodel_set.all())
+        context.setdefault("comments", location.commentmodel_set.all())
+
+        if location in self.request.user.internshiplocationmodel_set.all():
+            context.setdefault("is_enrolled", True)
+
+        context.setdefault(
+            "total_hours", location.get_total_hours(self.request.user)
+        )
+
         return context
 
     def post(self, *args, **kwargs):
