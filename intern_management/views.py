@@ -13,10 +13,10 @@ from django.utils.encoding import force_bytes
 from .forms import InternshipLogForm
 from .models import (
     InternshipLocationModel, LoggedHoursModel, CommentModel,
-    AvailableWorkModel
 )
 from .tokens import default_token_generator as token_gen
 # Create your views here.
+
 
 class HomePageView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
@@ -33,16 +33,6 @@ class HomePageView(LoginRequiredMixin, ListView):
             return queryset
         return super().get_queryset()
 
-class AvailableWorkView(LoginRequiredMixin, ListView):
-    model = AvailableWorkModel
-    template_name = "intern_management/available_work.html"
-
-    def get_queryset(self):
-        location = get_object_or_404(InternshipLocationModel, pk=self.kwargs['pk'])
-        queryset = AvailableWorkModel.objects.filter(
-            location=location
-        )
-        return queryset
 
 class InternshipListView(LoginRequiredMixin, ListView):
     model = InternshipLocationModel
@@ -60,6 +50,7 @@ class InternshipListView(LoginRequiredMixin, ListView):
             ).order_by('title')
         return queryset
 
+
 class IntershipLocationDetail(DetailView):
     model = InternshipLocationModel
     template_name = "intern_management/location.html"
@@ -75,6 +66,10 @@ class IntershipLocationDetail(DetailView):
 
         context.setdefault(
             "total_hours", location.get_total_hours(self.request.user)
+        )
+        context.setdefault(
+            "available_work",
+            location.availableworkmodel_set.all()
         )
 
         return context

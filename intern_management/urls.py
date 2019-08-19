@@ -19,11 +19,6 @@ urlpatterns = [
         name='location_details'
     ),
     path(
-        'location/<int:pk>/availablework',
-        views.AvailableWorkView.as_view(),
-        name='available_work'
-    ),
-    path(
         'location/signup/',
         views.InternshipSignUpView.as_view(),
         name='location_sign_up'

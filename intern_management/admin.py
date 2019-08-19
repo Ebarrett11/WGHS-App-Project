@@ -13,24 +13,30 @@ class LoggedHoursInline(admin.TabularInline):
     can_delete = True
     extra = 0
 
+
 class CommentInline(admin.TabularInline):
     model = CommentModel
     fields = ("user", "text", "date_posted")
     can_delete = True
     extra = 0
 
-class CommentInline(admin.TabularInline):
+
+class AvailabeWorkInline(admin.TabularInline):
     model = AvailableWorkModel
-    fields = ("text", "date_posted")
+    fields = ("subject", "text")
     can_delete = True
     extra = 0
+
 
 @admin.register(InternshipLocationModel)
 class InternshipAdmin(admin.ModelAdmin):
     ordering = ['title']
     list_display = ('title', 'address', 'contact_email')
     search_fields = ['title', 'description']
-    inlines = [LoggedHoursInline, CommentInline]
+    inlines = [
+        LoggedHoursInline, CommentInline,
+        AvailabeWorkInline
+    ]
     fieldsets = [
         (None, {
             'fields': ('title', 'address', 'managers', 'tags', 'outstanding_tokens')
