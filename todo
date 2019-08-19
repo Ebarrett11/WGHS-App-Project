@@ -22,6 +22,8 @@ L:
 
     Finish Location Manager functionality (should be able to edit locations they have permission to edit)
 
+    Make images the uploaded images and not ones pulled from the internet
+
 Things to talk about with Irvin:
 
     Email servers, need SMTP to send email. Idk if they already have one or if they need one. Can use google
