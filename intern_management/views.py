@@ -31,7 +31,7 @@ class HomePageView(LoginRequiredMixin, ListView):
                 | Q(description__contains=self.request.GET['search'])
             ).order_by('title')
             return queryset
-        return super().get_queryset()
+        return super().get_queryset().order_by('title')
 
 
 class InternshipListView(LoginRequiredMixin, ListView):

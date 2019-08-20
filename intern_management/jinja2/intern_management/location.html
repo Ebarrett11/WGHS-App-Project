@@ -1,0 +1,97 @@
+<!-- This is the enlarged form for the locations, it's accesed by clcking on view inside of the home page -->
+
+{% extends "intern_management/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid p-4 p-md-5 text-white bg-dark">
+    <div class="row">
+        <div class="col-lg px-0">
+            <h1 class="display-4 font-italic">{{ location.title }}</h1>
+            <p class="lead my-3">{{ location.description }}</p>
+            <p class="lead mb-0">Address: {{ location.address }}</p>
+            <p class="lead mb-0">Tags: {{ location.tags }}</p>
+        </div>
+        <div class="col-lg p-2">
+            <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F9%2F95%2FCatVibrissaeFullFace.JPG%2F1200px-CatVibrissaeFullFace.JPG&f=1" alt="" width="100%" class="rounded">
+        </div>
+    </div>
+</div>
+<!-- User total Hours -->
+{% if is_enrolled %}
+    <div class="container my-4 p-5">
+        <h4>Total Logged Hours: </h4>
+        <hr>
+        <p>{{ total_hours }}</p>
+    </div>
+{% endif %}
+<!-- Job listings -->
+<div class="container">
+    <div class="container">
+        <h4>Available Work</h4>
+        <hr>
+    </div>
+    {% if available_work %}
+        {% for post in available_work %}
+        <div class="container my-3 rounded p-3" style="border: 1px solid #ccc;">
+            <div class="container-fluid px-4 mt-3">
+                <strong>{{ post.subject }}</strong>
+            </div>
+            <div class="container-fluid px-4 mt-3">
+                {{ post.text }}
+            </div>
+            <div class="container-fluid px-4 mt-3">
+                <a class="btn btn-info btn-small" href="">Sign Up</a>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <div class="container m-5 text-center">
+            <h4>Sorry No Available Work Posted for this Location :(</h4>
+        </div>
+    {% endif %}
+</div>
+
+
+<!-- Comment Section -->
+<div class="container mt-5">
+    <h4>User comments</h4>
+    <hr>
+
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="container-fluid my-2 rounded" style="border: 1px solid #ccc;">
+                <div class="row p-3">
+                    <div class="col-md-1">
+                        {{ comment.user.username }}
+                    </div>
+                    <div class="col-md">
+                        {{ comment.text }}
+                    </div>
+                    <div class="col-md-2">
+                        <small class="text-muted">{{ comment.date_posted }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+
+        <div class="container">
+            <h3>No one has given feedback here :(</h3>
+            <p>please leave a review of your experience</p>
+        </div>
+    {% endif %}
+
+    <div class="container p-3">
+        <div class="row ">
+            <form method="post">
+                {% csrf_token %}
+                <p class="m-0 py-1">Leave your feedback:</p>
+                <textarea class="w-100 p-3" name="text" rows="8" cols="80" placeholder="Type Feedback Here"></textarea>
+                <button class="btn btn-dark btn-md mt-2" type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

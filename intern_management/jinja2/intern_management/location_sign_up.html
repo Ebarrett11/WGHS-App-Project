@@ -1,0 +1,19 @@
+<!-- Where students can fill out information about themselves so that they can be placed in opportunities
+Includes a google forms iframe -->
+
+<!-- Site fills out location sign up form
+request sent to staff who adds to database and assigns manager to location -->
+{% extends "intern_management/base.html" %}
+{% block content %}
+<div class="container text-center">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h2>Location Sign Up Form</h2>
+        <small>&#42;Please fill out this form in it's entirety</small>
+    </div>
+    <div class="container">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfizQXDY7jgkONRjWLtyVrnIYn_5xh84cvuH11PobOAct3gzA/viewform?embedded=true" width="640" height="2070" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+
+</div>
+{% endblock content %}

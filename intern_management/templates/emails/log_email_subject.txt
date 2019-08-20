@@ -1,1 +1,0 @@
-Log hours request for {{ name }} at {{ location }}
