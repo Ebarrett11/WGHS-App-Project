@@ -1,15 +1,14 @@
 {% extends "intern_management/base.html" %}
-{% load static %}
 {% block content %}
     <div class="center_box">
         <div class="logo_small">
-            <img src="{% static 'intern_management/images/logo.png' %}">
+            <img src="{{ static('intern_management/images/logo.png') }}">
             <p>WGHS Opportunities</p>
         </div>
         <h2>Password Reset</h2>
 
         <form method="post">
-            {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <fieldset class="input_fields">
                 <div class="fieldWrapper">
                     {{ form }}

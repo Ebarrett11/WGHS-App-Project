@@ -3,9 +3,8 @@ Included as well is the studetns current locations in a thumbnail form as well a
 to view (an enlarged form) and log hours for the locations -->
 
 {% extends "intern_management/base.html" %}
-{% load static %}
 {% block content %}
-<!-- <div class="container_row white" id="home-search">
+{# <!-- <div class="container_row white" id="home-search">
 <div class="search">
 <form method="GET" class="search_form">
 <div class="fieldWrapper" style="width: 100%;">
@@ -67,14 +66,14 @@ to view (an enlarged form) and log hours for the locations -->
 {% endif %}
 </div>
 </div> -->
-
+#}
 <!-- The blue banner at the top of the page: contains username, profile img, and log out -->
 <section class="container-fluid p-5 text-center text-light" style="background: rgb(51, 102, 153); ">
     <div class="container mt-5">
         <div class="row mb-4 align-items-center justify-content-center">
             <img src="http://www.funlava.com/wp-content/uploads/2013/03/cute-kitten-cats-6987468-670-5782.jpg" style="height: 70px; width: 70px; border-radius: 50%;" class="mr-4">
-            <h1 class="jumbotron-heading">{{ user.username|upper }}</h1>
-            <small class="ml-2" style="transform: translate(0, 8px);"> <a style="color: #fcfcfc; text-decoration: underline;" href="{% url 'users:logout' %}">log out</a></small>
+            <h1 class="jumbotron-heading">{{ request.user.username|upper }}</h1>
+            <small class="ml-2" style="transform: translate(0, 8px);"> <a style="color: #fcfcfc; text-decoration: underline;" href="{{ url('users:logout') }}">log out</a></small>
         </div>
     </div>
 </section>
@@ -89,11 +88,11 @@ to view (an enlarged form) and log hours for the locations -->
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                     <div class="card-body">
                         <h4>{{ location.title }}</h4>
-                        <p class="card-text">{{ location.description|truncatewords:30 }}</p>
+                        <p class="card-text">{{ location.description|truncate(200) }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_details' location.pk %}">View</a></button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_log' location.pk %}"> Log Hours</a></button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ url('intern_management:location_details', args=[location.pk]) }}">View</a></button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ url('intern_management:location_log', args=[location.pk]) }}"> Log Hours</a></button>
                             </div>
                         </div>
                     </div>

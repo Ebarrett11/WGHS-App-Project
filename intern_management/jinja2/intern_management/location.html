@@ -1,7 +1,6 @@
 <!-- This is the enlarged form for the locations, it's accesed by clcking on view inside of the home page -->
 
 {% extends "intern_management/base.html" %}
-{% load static %}
 {% block content %}
 <div class="container-fluid p-4 p-md-5 text-white bg-dark">
     <div class="row">
@@ -85,7 +84,7 @@
     <div class="container p-3">
         <div class="row ">
             <form method="post">
-                {% csrf_token %}
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                 <p class="m-0 py-1">Leave your feedback:</p>
                 <textarea class="w-100 p-3" name="text" rows="8" cols="80" placeholder="Type Feedback Here"></textarea>
                 <button class="btn btn-dark btn-md mt-2" type="submit">Submit Feedback</button>

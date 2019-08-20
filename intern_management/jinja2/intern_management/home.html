@@ -3,9 +3,8 @@ a caousel that rotates through 3 featured locations -->
 
 <!-- Loads the basic format of the pages -->
 {% extends "intern_management/base.html" %}
-{% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'intern_management/css/carousel.css' %}">
+<link rel="stylesheet" href="{{ static('intern_management/css/carousel.css') }}">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
 integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
 crossorigin=""/>
@@ -81,10 +80,10 @@ crossorigin=""></script>
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
                     <h4>{{ location.title }}</h4>
-                    <p class="card-text">{{ location.description|truncatewords:30 }}</p>
+                    <p class="card-text">{{ location.description|truncate(200) }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'intern_management:location_details' location.pk %}">View</a></button>
+                            <a class="btn btn-sm btn-outline-info" href="{{ url('intern_management:location_details', args=[location.pk]) }}">View</a>
                         </div>
                     </div>
                 </div>
@@ -97,28 +96,6 @@ crossorigin=""></script>
         </div>
         {% endif %}
     </div>
-    <div class="container-fluid text-center">
-        {% if is_paginated %}
-        {% if page_obj.has_previous %}
-        <a href="?page=1" class="margin-link">First</a>
-        <a href="?page={{ page_obj.previous_page_number }}" class="margin-link">Previous</a>
-        {% endif %}
-
-        {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-        <a href="?page={{ num }}" class="margin-link">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3'%}
-        <a href="?page={{ num }}" class="margin-link">{{ num }}</a>
-        {% endif %}
-        {% endfor %}
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="margin-link">Next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}" class="margin-link">Last</a>
-        {% endif %}
-        {% endif %}
-    </div>
-
 </div>
 
 <!-- Begin map content -->

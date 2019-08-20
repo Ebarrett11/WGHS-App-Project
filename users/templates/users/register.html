@@ -1,11 +1,10 @@
 {% extends "intern_management/base.html" %}
-{% load static %}
 {% block content %}
 <div class="center_box">
     {{ form.non_field_errors }}
     <h4>Register</h4>
     <form method="post">
-        {% csrf_token %}
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <fieldset class="input_fields">
             {% for field in form %}
             <div class="fieldWrapper">
@@ -21,6 +20,6 @@
         </fieldset>
         <button type="submit" class="btn btn-info">Register</button>
     </form>
-    <small class="dulled_text">Already have an account? <a id="login-back" href="{% url 'users:login' %}"> Login</a></small>
+    <small class="dulled_text">Already have an account? <a id="login-back" href="{{ url('users:login') }}"> Login</a></small>
 </div>
 {% endblock content %}
