@@ -138,7 +138,7 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             'domain': get_current_site(self.request),
             'request_id': urlsafe_base64_encode(
                 force_bytes(request.id)
-            ).decode(),
+            ),
             'token': token,
         }
 

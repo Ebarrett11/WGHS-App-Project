@@ -44,7 +44,7 @@ bootstrap as well as the navbar and footer.  -->
     <main role="main" class="flex-shrink-0">
         {% if messages %}
         <div class="mt-2">
-            {% for message in messages %}
+            {% for message in messages(request) %}
             <div class="alert alert-{{ message.tags }}">
                 {{ message }}
             </div>
