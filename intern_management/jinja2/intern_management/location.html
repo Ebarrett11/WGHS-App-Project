@@ -20,7 +20,7 @@
     <div class="container my-4 p-5">
         <h4>Total Logged Hours: </h4>
         <hr>
-        <p>{{ total_hours }}</p>
+        <p>{{ location.get_total_hours(request.user) }}</p>
     </div>
 {% endif %}
 <!-- Job listings -->

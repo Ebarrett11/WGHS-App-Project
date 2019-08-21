@@ -36,20 +36,20 @@ bootstrap as well as the navbar and footer.  -->
                         <a class="nav-link" href="{{ url('intern_management:profile') }}">Profile</a>
                     </li>
                 </ul>
-
             </div>
         </nav>
     </header>
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
+        {% set messages = messages(request) %}
         {% if messages %}
-        <div class="mt-2">
-            {% for message in messages(request) %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+            <div class="container mt-2">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
         {% endif %}
 
         {% block content %}
