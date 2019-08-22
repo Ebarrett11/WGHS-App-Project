@@ -21,7 +21,10 @@ class InternshipLocationModel(models.Model):
     outstanding_tokens = models.TextField(null=True, blank=True)
     # comma deliminated list of tags that apply to this location
     tags = models.TextField(null=True)
-    image = models.ImageField(null=True, validators=[validate_image_size])
+    image = models.ImageField(
+        null=True, validators=[validate_image_size],
+        upload_to="location_pictures"
+    )
 
     def __str__(self):
         return self.title

@@ -11,4 +11,7 @@ class Profile(models.Model):
     ]
     type = models.CharField(choices=choices, max_length=7)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(null=True, validators=[validate_image_size])
+    image = models.ImageField(
+        null=True, validators=[validate_image_size],
+        upload_to="user_profile_pics"
+    )

@@ -3,8 +3,6 @@ E:
 
     Make better email template hours and email students after their hours are confirmed or denied
 
-    Profile needs to display all valid logged hours
-
     Comment all code so it's maintainable as well as write up docs for it
 
     Browse all locations and sign up option
@@ -14,12 +12,9 @@ E:
 L:
     Write Tests for all Django code
 
-    Implement map API Map with all locations
-
     Search by zip code
 
     Work available section with User sign up on location detail page
-
 
     Finish Location Manager functionality (should be able to edit locations they have permission to edit)
 
