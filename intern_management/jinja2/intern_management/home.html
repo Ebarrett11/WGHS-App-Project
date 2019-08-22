@@ -139,7 +139,11 @@ crossorigin=""></script>
     }).addTo(map);
     L.marker([38.589681, -90.348477]).addTo(map).bindPopup("<p> WGHS</p>");
     {% if locations %}
+<<<<<<< HEAD
         {% for location in locations %}
+=======
+        {% for location in locations%}
+>>>>>>> 043836780a0362cf467e84afa48e696093c15c4e
             // Get Locations from Nominatim Geodecoder
             fetch(
                 location_query_url + "{{ "q=%s"|format(location.address|urlencode) }}",
