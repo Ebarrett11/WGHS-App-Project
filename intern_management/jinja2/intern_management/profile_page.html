@@ -4,18 +4,19 @@ to view (an enlarged form) and log hours for the locations -->
 
 {% extends "intern_management/base.html" %}
 {% block content %}
+{% set userimage = request.user.profile.image%}
 <!-- The blue banner at the top of the page: contains username, profile img, and log out -->
-<section class="container-fluid p-5 text-center text-light" style="background: rgb(51, 102, 153); ">
-    <div class="container mt-5">
-        <div class="row mb-4 align-items-center justify-content-center">
-            {% set userimage = request.user.profile.image%}
-            {% if userimage %}
-            <img src="{{ userimage.url }}" class="mr-4 rounded-circle" height="10vw" width="10vw">
-            {% else %}
-                <svg height="8vw" width="8vw">
-                    <circle cx='50%' cy='50%' r="35%"/>
-                </svg>
-            {% endif %}
+<section class="container-fluid p-5 text-light d-flex align-items-center justify-content-center" style="
+    {% if userimage %}
+        background: rgb(51, 102, 153) url({{ request.user.profile.image.url }}) no-repeat fixed center;
+        background-size: cover;
+    {% else %}
+        background: rgb(51, 102, 153);
+    {% endif %}
+    height: 50vh;
+    ">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
             <h1 class="jumbotron-heading">{{ request.user.username|capitalize }}</h1>
             <small class="ml-2" style="transform: translate(0, 8px);"> <a style="color: #fcfcfc; text-decoration: underline;" href="{{ url('users:logout') }}">log out</a></small>
         </div>
