@@ -9,6 +9,8 @@ E:
 
     Browse all locations and sign up option
 
+    Add more options to home page search e.g make search able to search by tags
+
 L:
     Write Tests for all Django code
 
@@ -18,11 +20,8 @@ L:
 
     Work available section with User sign up on location detail page
 
-    Add more options to home page search e.g make search able to search by tags
 
     Finish Location Manager functionality (should be able to edit locations they have permission to edit)
-
-    Make images the uploaded images and not ones pulled from the internet
 
 Things to talk about with Irvin:
 
