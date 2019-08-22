@@ -131,9 +131,30 @@ crossorigin=""></script>
 <div id="map"></div>
 
 <script>
-    var map = L.map('map').setView([51.505,-0.09], 13);
+    const location_query_url = "https://nominatim.openstreetmap.org/search?format=json&";
+
+    let map = L.map('map').setView([38.589681, -90.348477], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    L.marker([38.589681, -90.348477]).addTo(map).bindPopup("<p> WGHS</p>");
+    {% if locations %}
+        {% for location in locations %}
+            // Get Locations from Nominatim Geodecoder
+            fetch(
+                location_query_url + "{{ "q=%s"|format(location.address|urlencode) }}",
+                {'method': 'GET'}
+            )
+            .then(resp => resp.json())
+            .then(function(data){
+                marker = L.marker(
+                    [data[0].lat, data[0].lon]
+                ).addTo(map);
+                marker.bindPopup(
+                    "<p>{{ location.title }}</p>"
+                );
+            })
+            {% endfor %}
+        {% endif %}
 </script>
 {% endblock %}
