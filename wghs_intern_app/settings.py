@@ -140,6 +140,15 @@ LOGIN_URL = 'users:login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+# App level config goes here
+
 ADMIN_EMAIL = 'test@testing.com'
 
 URL_EXPIRE_DAYS = 1
+
+# Max User upload file in MB
+MAX_FILE_SIZE = 3

@@ -4,75 +4,19 @@ to view (an enlarged form) and log hours for the locations -->
 
 {% extends "intern_management/base.html" %}
 {% block content %}
-{# <!-- <div class="container_row white" id="home-search">
-<div class="search">
-<form method="GET" class="search_form">
-<div class="fieldWrapper" style="width: 100%;">
-<label for="search">
-<img class="search_icon" src="{% static 'intern_management/images/search.png' %}">
-</label>
-<input id="search" type="text" name="search">
-</div>
-<button type="submit">Search</button>
-</form>
-</div>
-</div>
-<div class="container_column">
-{% if locations %}
-{% for location in locations %}
-<div class="location_brief">
-<div class="location_details">
-<img class="location_brief_image" src="https://i.pinimg.com/originals/d7/10/91/d71091b4b4e7d89a3763395cdddd6d75.jpg" alt="Image of volunteer location">
-<div class="location_brief_text">
-<h3>{{ location.title }}</h3>
-<small>
-{{ location.description|truncatewords:30 }}
-</small>
-</div>
-</div>
-<div class="location_menu">
-<a href="{% url 'intern_management:location_details' location.pk %}">Details</a>
-{% if not user.profile.type == "Man" %}
-<a href="{% url 'intern_management:location_log' location.pk%}"> Log Hours</a>
-{% endif %}
-
-</div>
-</div>
-{% endfor %}
-{% else %}
-<div class="container_row">
-<small> You are not signed up for any internships. <a href="">Please request them here</a></small>
-</div>
-{% endif %}
-<div class="container_row">
-{% if is_paginated %}
-{% if page_obj.has_previous %}
-<a href="?page=1" class="margin-link">First</a>
-<a href="?page={{ page_obj.previous_page_number }}" class="margin-link">Previous</a>
-{% endif %}
-
-{% for num in page_obj.paginator.page_range %}
-{% if page_obj.number == num %}
-<a href="?page={{ num }}" class="margin-link">{{ num }}</a>
-{% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3'%}
-<a href="?page={{ num }}" class="margin-link">{{ num }}</a>
-{% endif %}
-{% endfor %}
-
-{% if page_obj.has_next %}
-<a href="?page={{ page_obj.next_page_number }}" class="margin-link">Next</a>
-<a href="?page={{ page_obj.paginator.num_pages }}" class="margin-link">Last</a>
-{% endif %}
-{% endif %}
-</div>
-</div> -->
-#}
 <!-- The blue banner at the top of the page: contains username, profile img, and log out -->
 <section class="container-fluid p-5 text-center text-light" style="background: rgb(51, 102, 153); ">
     <div class="container mt-5">
         <div class="row mb-4 align-items-center justify-content-center">
-            <img src="http://www.funlava.com/wp-content/uploads/2013/03/cute-kitten-cats-6987468-670-5782.jpg" style="height: 70px; width: 70px; border-radius: 50%;" class="mr-4">
-            <h1 class="jumbotron-heading">{{ request.user.username|upper }}</h1>
+            {% set userimage = request.user.profile.image%}
+            {% if userimage %}
+            <img src="{{ userimage.url }}" class="mr-4 rounded-circle" height="10vw" width="10vw">
+            {% else %}
+                <svg height="8vw" width="8vw">
+                    <circle cx='50%' cy='50%' r="35%"/>
+                </svg>
+            {% endif %}
+            <h1 class="jumbotron-heading">{{ request.user.username|capitalize }}</h1>
             <small class="ml-2" style="transform: translate(0, 8px);"> <a style="color: #fcfcfc; text-decoration: underline;" href="{{ url('users:logout') }}">log out</a></small>
         </div>
     </div>
@@ -85,7 +29,11 @@ to view (an enlarged form) and log hours for the locations -->
             {% for location in locations %}
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    {% if location.image %}
+                        <img class="card-img-top rounded" src="{{ location.image.url }}" alt="Opportunity Image" width="100%" height="255px">
+                    {% else %}
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="255px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    {% endif %}
                     <div class="card-body">
                         <h4>{{ location.title }}</h4>
                         <p class="card-text">{{ location.description|truncate(200) }}</p>

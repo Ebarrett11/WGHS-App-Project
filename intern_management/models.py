@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+from .validators import validate_image_size
+
 
 class InternshipLocationModel(models.Model):
     """
@@ -19,6 +21,7 @@ class InternshipLocationModel(models.Model):
     outstanding_tokens = models.TextField(null=True, blank=True)
     # comma deliminated list of tags that apply to this location
     tags = models.TextField(null=True)
+    image = models.ImageField(null=True, validators=[validate_image_size])
 
     def __str__(self):
         return self.title
@@ -61,14 +64,21 @@ class LoggedHoursModel(models.Model):
 class CommentModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
+    location = models.ForeignKey(
+        InternshipLocationModel,
+        on_delete=models.CASCADE
+    )
     date_posted = models.DateTimeField()
 
     def __str__(self):
         return "Comment by {user}".format(user=self.user.username)
 
+
 class AvailableWorkModel(models.Model):
-    location = models.ForeignKey(InternshipLocationModel, on_delete=models.CASCADE)
+    location = models.ForeignKey(
+        InternshipLocationModel,
+        on_delete=models.CASCADE
+    )
     subject = models.CharField(max_length=200)
     text = models.TextField()
     contact_email = models.CharField(max_length=30)
