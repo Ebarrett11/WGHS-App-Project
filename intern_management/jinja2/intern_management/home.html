@@ -135,7 +135,10 @@ crossorigin=""></script>
 <script>
     const location_query_url = "https://nominatim.openstreetmap.org/search?format=json&";
 
-    let map = L.map('map').setView([38.589681, -90.348477], 15);
+    let map = L.map('map', {
+        minZoom: '10',
+        zoom: '15',
+    }).setView([38.589681, -90.348477]);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
