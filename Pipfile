@@ -10,6 +10,7 @@ django = {extras = ["argon2"],version = "*"}
 jinja2 = "*"
 argon2-cffi = "*"
 pillow = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.7"

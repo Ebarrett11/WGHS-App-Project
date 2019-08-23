@@ -34,4 +34,7 @@ class InternshipLogFormTests(TestCase):
         form.send_mail(context, "testing@testing.com")
 
         self.assertEqual(len(mail.outbox), 1)
-        self.assertContains()
+        self.assertTrue(
+            form.cleaned_data['name'] in mail.outbox[0].subject
+            and form.cleaned_data['location'].title in mail.outbox[0].subject
+        )

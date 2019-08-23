@@ -1,4 +1,6 @@
 import hashlib
+import string
+import random
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.sites.shortcuts import get_current_site
@@ -112,9 +114,6 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
-        import string
-        import random
-
         location = form.cleaned_data['location']
 
         request_id = ''.join(
@@ -130,6 +129,7 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             location,
             request
         )
+        token_gen.assign_token(token, location)
         # context for email to be sent
         context = {
             'name': form.cleaned_data['name'],
@@ -141,14 +141,6 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             ),
             'token': token,
         }
-
-        # save token to location
-        location.outstanding_tokens += str(
-            hashlib.sha256(
-                force_bytes(token)
-            ).hexdigest()) + ':'
-
-        location.save()
 
         # send email to location manager
         form.send_mail(context, location.contact_email)
@@ -211,8 +203,9 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
         token = self.kwargs["token"]
         location = request.location
         # Validate Token
-        if token_gen.check_token(location,
-                                 request, token):
+        if token_gen.is_valid_token(
+            location, request, token
+        ):
             # if self.request.user in request.location.managers:
             return True
 

@@ -19,10 +19,21 @@ class UrlTokenGenerator:
             self._make_hash_value(location, request),
             secret=self.secret,
         ).hexdigest()[::2]  # Limit to 20 characters to shorten the URL.
-
         return hash
 
-    def check_token(self, location, request, token):
+    def assign_token(self, token, location):
+        """
+            Description:
+                Assign Token to Location Model
+        """
+        # save token to location
+        location.outstanding_tokens += str(
+            hashlib.sha256(
+                force_bytes(token)
+            ).hexdigest()) + ':'
+        location.save()
+
+    def is_valid_token(self, location, request, token):
         """
         Check that a password reset token is correct for a given user.
         """
@@ -39,10 +50,10 @@ class UrlTokenGenerator:
 
         # loop through locations valid tokens and compare them to given token
         location_tokens = location.outstanding_tokens
-        print(location_tokens)
         tokens = location_tokens.split(':')
         token_hash = str(hashlib.sha256(force_bytes(token)).hexdigest())
         if token_hash not in tokens:
+            print("Token not given by this location")
             return False
         return True
 
