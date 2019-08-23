@@ -1,26 +1,18 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
-from .forms import UserRegisterForm
+from django.shortcuts import redirect
+from django.views.generic import CreateView
+from django.contrib.auth.models import User
 from django.contrib import messages
-# Create your views here.
+
+from .forms import UserRegisterForm
 
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f"Account created for {username}!")
-            return redirect('users:login')
-    else:
-        form = UserRegisterForm()
-    return render(request, "users/register.html", {'form': form})
+class UserRegistrationView(CreateView):
+    model = User
+    template_name = "users/register.html"
+    form_class = UserRegisterForm
 
-
-def login(request):
-    return render(request, 'users/login.html')
-
-
-class ProfileView(TemplateView):
-    template_name = "users/profile.html"
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get('username')
+        messages.success(self.request, f"Account created for {username}!")
+        return redirect('users:login')

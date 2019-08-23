@@ -1,0 +1,15 @@
+{% extends "intern_management/base.html" %}
+{% block content %}
+<div class="container w-50 my-5 p-5 rounded" style="background: #efefef;">
+    <h4>Register</h4>
+    <hr>
+    <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <fieldset class="input_fields mt-4 mb-3 p-0">
+            {{ form }}
+        </fieldset>
+        <button type="submit" class="btn btn-info mb-2">Register</button>
+    </form>
+    <small class="text-muted">Already have an account? <a href="{{ url('users:login') }}"> Login</a></small>
+</div>
+{% endblock content %}
