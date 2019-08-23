@@ -19,9 +19,4 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name="users/logout.html"),
         name='logout'
     ),
-    path(
-        'reset/',
-        auth_views.PasswordResetView.as_view(template_name="users/reset.html"),
-        name='reset'
-    ),
 ]

@@ -20,7 +20,7 @@ from .tokens import default_token_generator as token_gen
 # Create your views here.
 
 
-class HomePageView(LoginRequiredMixin, ListView):
+class HomePageView(ListView):
     model = InternshipLocationModel
     template_name = "intern_management/home.html"
     context_object_name = "locations"
