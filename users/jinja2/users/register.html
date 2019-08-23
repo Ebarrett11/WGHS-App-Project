@@ -4,12 +4,24 @@
     <h4>Register</h4>
     <hr>
     <form method="post">
+    {{ form.non_field_errors() }}
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-        <fieldset class="input_fields mt-4 mb-3 p-0">
-            {{ form }}
+        <fieldset class="input_fields">
+            {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag() }} {{ field }}
+                {% if field.help_text %}
+                <div class="help">
+                    {{ field.help_text|safe }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
         </fieldset>
         <button type="submit" class="btn btn-info mb-2">Register</button>
     </form>
     <small class="text-muted">Already have an account? <a href="{{ url('users:login') }}"> Login</a></small>
 </div>
+
 {% endblock content %}
