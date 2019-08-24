@@ -24,6 +24,7 @@ SECRET_KEY = 'z&t^jca_lj4iwyuj^yi&%c@70p6u@1h(n$@wk2)=%12x3j9l1m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Must provide value for this to work when debug is turned off
 ALLOWED_HOSTS = []
 
 
@@ -134,19 +135,51 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Login Settings
+
 LOGIN_REDIRECT_URL = 'intern_management:home'
 
 LOGIN_URL = 'users:login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Media Settings
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-# App level config goes here
+# Email Settings
 
-ADMIN_EMAIL = 'test@testing.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.google.com'
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+# Very important settings
+# Find a way to make sure no one sees these credentials
+# Maybe use an environment variable
+
+EMAIL_HOST_USER = ''
+
+EMAIL_HOST_PASSWORD = ''
+
+# TLS/SSL Settings (Set all to True in production!!!!)
+
+SECURE_SSL_REDIRECT = False
+
+SESSION_COOKIE_SECURE = False
+
+CSRF_COOKIE_SECURE = False
+
+# Sessions Settings
+
+SESSION_COOKIE_AGE = 172800
+
+
+# Custom Settings
+# App level config goes here
 
 URL_EXPIRE_DAYS = 1
 
