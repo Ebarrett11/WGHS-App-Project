@@ -14,7 +14,6 @@ class TestTokenValidation(TestCase):
     def setUp(self):
         location = InternshipLocationModel.objects.create(
             title="Testing Location",
-            outstanding_tokens=''
         )
         location.loggedhoursmodel_set.create(
             total_hours=5,
@@ -30,6 +29,9 @@ class TestTokenValidation(TestCase):
             ),
             id="2"
         )
+        InternshipLocationModel.objects.create(
+            title="Testing Location 2",
+        )
 
     def test_token_match(self):
         """
@@ -40,7 +42,6 @@ class TestTokenValidation(TestCase):
         request = location.loggedhoursmodel_set.get(id=1)
 
         token = default_token_generator.make_token(location, request)
-        default_token_generator.assign_token(token, location)
 
         self.assertTrue(
             default_token_generator.is_valid_token(
@@ -59,7 +60,7 @@ class TestTokenValidation(TestCase):
         request2 = location.loggedhoursmodel_set.get(id=1)
 
         token = default_token_generator.make_token(location, request1)
-        default_token_generator.assign_token(token, location)
+
         self.assertFalse(
             default_token_generator.is_valid_token(
                 location, request2, token
@@ -81,8 +82,9 @@ class TestTokenValidation(TestCase):
                 Token must have been assigned to accessed Location
         """
         location = InternshipLocationModel.objects.get(pk=1)
+        location2 = InternshipLocationModel.objects.get(pk=2)
         request = location.loggedhoursmodel_set.get(id=1)
-        token = default_token_generator.make_token(location, request)
+        token = default_token_generator.make_token(location2, request)
         self.assertFalse(
             default_token_generator.is_valid_token(
                 location, request, token

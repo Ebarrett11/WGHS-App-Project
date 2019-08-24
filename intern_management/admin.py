@@ -42,7 +42,7 @@ class InternshipAdmin(admin.ModelAdmin):
             'fields': (
                 'title', 'address',
                 'managers', 'image',
-                'tags', 'outstanding_tokens'
+                'tags',
             )
         }),
         ('Description', {

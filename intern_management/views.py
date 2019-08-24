@@ -135,7 +135,6 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
             location,
             request
         )
-        token_gen.assign_token(token, location)
         # context for email to be sent
         context = {
             'name': form.cleaned_data['name'],
@@ -175,20 +174,6 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
             pk=urlsafe_base64_decode(kwargs['request_id']).decode()
         )
         request.is_valid = True
-
-        # invalidate Token
-        location = request.location
-        location_tokens = request.location.outstanding_tokens
-        tokens = location_tokens.split(':')
-        token_hash = str(
-            hashlib.sha256(
-                force_bytes(kwargs['token'])
-            ).hexdigest()
-        )
-        tokens.remove(token_hash)
-        tokens_serialized = ":".join(tokens)
-        location.outstanding_tokens = tokens_serialized
-        location.save()
         request.save()
 
         # Give success message
