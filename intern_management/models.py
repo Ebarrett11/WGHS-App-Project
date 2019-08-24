@@ -85,3 +85,4 @@ class AvailableWorkModel(models.Model):
     subject = models.CharField(max_length=200)
     text = models.TextField()
     contact_email = models.CharField(max_length=30)
+    students = models.ManyToManyField(User, blank=True)

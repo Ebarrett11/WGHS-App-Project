@@ -4,6 +4,8 @@ from django.core import mail
 from intern_management.forms import InternshipLogForm
 from intern_management.models import InternshipLocationModel
 
+from ..email import send_mail
+
 
 class InternshipLogFormTests(TestCase):
     def setUp(self):
@@ -31,7 +33,7 @@ class InternshipLogFormTests(TestCase):
             'request_id': "fdsafa",
             'token': "test token",
         }
-        form.send_mail(context, "testing@testing.com")
+        send_mail(context, "testing@testing.com")
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertTrue(

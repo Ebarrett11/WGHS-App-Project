@@ -1,6 +1,7 @@
 import hashlib
 import string
 import random
+
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.sites.shortcuts import get_current_site
@@ -11,12 +12,15 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
+from django.conf import settings
 
 from .forms import InternshipLogForm
 from .models import (
     InternshipLocationModel, LoggedHoursModel, CommentModel,
+    AvailableWorkModel
 )
 from .tokens import default_token_generator as token_gen
+from .email import send_mail
 # Create your views here.
 
 
@@ -36,24 +40,7 @@ class HomePageView(ListView):
         return super().get_queryset().order_by('title')
 
 
-class InternshipListView(LoginRequiredMixin, ListView):
-    model = InternshipLocationModel
-    template_name = "intern_management/profile_page.html"
-    context_object_name = "locations"
-
-    def get_queryset(self):
-        queryset = self.request.user.internshiplocationmodel_set.order_by(
-            'title'
-        )
-        if self.request.GET.get('search'):
-            queryset = self.request.user.internshiplocationmodel_set.filter(
-                Q(title__contains=self.request.GET['search'])
-                | Q(description__contains=self.request.GET['search'])
-            ).order_by('title')
-        return queryset
-
-
-class IntershipLocationDetail(DetailView):
+class IntershipDetailView(DetailView):
     model = InternshipLocationModel
     template_name = "intern_management/location.html"
     context_object_name = "location"
@@ -77,14 +64,33 @@ class IntershipLocationDetail(DetailView):
         return context
 
     def post(self, *args, **kwargs):
-        CommentModel.objects.create(
-            user=self.request.user,
-            location=get_object_or_404(
-                InternshipLocationModel, pk=kwargs['pk']
-            ),
-            text=self.request.POST['text'],
-            date_posted=timezone.now()
-        )
+        if "comment-text" in self.request.POST:
+            CommentModel.objects.create(
+                user=self.request.user,
+                location=get_object_or_404(
+                    InternshipLocationModel, pk=kwargs['pk']
+                ),
+                text=self.request.POST['text'],
+                date_posted=timezone.now()
+            )
+
+        if "sign-up" in self.request.POST:
+            work_pk = self.request.POST.get("sign-up")
+            work = get_object_or_404(AvailableWorkModel, pk=work_pk)
+            work.students.add(self.request.user)
+
+            send_mail(
+                {
+                    "name": self.request.user.username,
+                    "work": work.subject,
+                    "location": work.location.title,
+                    "email": self.request.user.email
+                },
+                settings.ADMIN_EMAIL,
+                email_template_name="emails/work_sign_up.html",
+                subject_template_name="emails/work_sign_up_subject.txt"
+            )
+
         return redirect("intern_management:location_details", pk=kwargs['pk'])
 
 
@@ -143,7 +149,7 @@ class InternshipLogHoursView(LoginRequiredMixin, FormView):
         }
 
         # send email to location manager
-        form.send_mail(context, location.contact_email)
+        send_mail(context, location.contact_email)
         messages.success(self.request, 'Request Submitted Successfully')
         return super().form_valid(form)
 
@@ -174,7 +180,11 @@ class InternshipConfirmHoursView(LoginRequiredMixin, UserPassesTestMixin,
         location = request.location
         location_tokens = request.location.outstanding_tokens
         tokens = location_tokens.split(':')
-        token_hash = str(hashlib.sha256(force_bytes(kwargs['token'])).hexdigest())
+        token_hash = str(
+            hashlib.sha256(
+                force_bytes(kwargs['token'])
+            ).hexdigest()
+        )
         tokens.remove(token_hash)
         tokens_serialized = ":".join(tokens)
         location.outstanding_tokens = tokens_serialized

@@ -149,7 +149,7 @@ MEDIA_URL = '/media/'
 
 # Email Settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_HOST = 'smtp.google.com'
 
@@ -182,6 +182,8 @@ SESSION_COOKIE_AGE = 172800
 # App level config goes here
 
 URL_EXPIRE_DAYS = 1
+
+ADMIN_EMAIL = "testing@testing.com"
 
 # Max User upload file in MB
 MAX_FILE_SIZE = 3

@@ -1,0 +1,1 @@
+{{ name }} signed up to do {{ work }} at {{ location }}

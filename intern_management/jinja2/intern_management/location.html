@@ -24,81 +24,95 @@
         </div>
     </div>
 </div>
-<!-- User total Hours -->
-{% if is_enrolled %}
-    <div class="container my-5">
-        <h4>Total Logged Hours: </h4>
-        <hr>
-        <div class="container">
-            <p class="mt-4">{{ location.get_total_hours(request.user) }}</p>
-        </div>
-    </div>
-{% endif %}
-<!-- Job listings -->
-<div class="container">
-    <h4>Available Work</h4>
-    <hr>
-    {% if available_work %}
-        {% for post in available_work %}
-        <div class="container my-3 rounded p-3" style="border: 1px solid #ccc;">
-            <div class="container-fluid px-4 mt-3">
-                <strong>{{ post.subject }}</strong>
+<div class="container pt-5">
+    <!-- User total Hours -->
+    {% if is_enrolled %}
+        <div class="container my-5">
+            <h4>Total Logged Hours: </h4>
+            <hr>
+            <div class="container">
+                <p class="mt-4">{{ location.get_total_hours(request.user) }}</p>
             </div>
-            <div class="container-fluid px-4 mt-3">
-                {{ post.text }}
-            </div>
-            <div class="container-fluid px-4 mt-3">
-                <a class="btn btn-info btn-small" href="">Sign Up</a>
-            </div>
-        </div>
-        {% endfor %}
-
-    {% else %}
-        <div class="container mt-4">
-            <p>Sorry No Available Work Posted for this Location :(</p>
         </div>
     {% endif %}
-</div>
+    <!-- Job listings -->
+    <div class="container">
+        <h4>Available Work</h4>
+        <hr>
+        {% if available_work %}
+            {% for post in available_work %}
+            <div class="container my-3 rounded p-3" style="border: 1px solid #ccc;">
+                <div class="container-fluid px-4 mt-3">
+                    <strong>{{ post.subject }}</strong>
+                </div>
+                <div class="container-fluid px-4 mt-3">
+                    {{ post.text }}
+                </div>
+                <div class="container-fluid px-4 mt-3">
+                    {% if not request.user in post.students.all() %}
+                        <form method="post">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                            <button class="btn btn-info btn-small" type="submit" name="sign-up" value="{{ post.location.pk }}">Sign Up</button>
+                        </form>
+                    {% else %}
+                        <div class="container m-0 p-0">
+                            <small class="m-0 p-0 text-muted">You have already signed up for this</small>
+                        </div>
+                    {% endif %}
 
 
-<!-- Comment Section -->
-<div class="container mt-5">
-    <h4>User comments</h4>
-    <hr>
-
-    {% if comments %}
-        {% for comment in comments %}
-            <div class="container-fluid my-2 rounded" style="border: 1px solid #ccc;">
-                <div class="row p-3">
-                    <div class="col-md-1">
-                        {{ comment.user.username|capitalize }}
-                    </div>
-                    <div class="col-md">
-                        {{ comment.text }}
-                    </div>
-                    <div class="col-md-2">
-                        <small class="text-muted">{{ comment.date_posted }}</small>
-                    </div>
                 </div>
             </div>
-        {% endfor %}
-    {% else %}
-        <div class="container mt-4">
-            <h5>No one has given feedback here :(</h5>
-            <p>please leave a review of your experience</p>
-        </div>
-    {% endif %}
+            {% endfor %}
 
-    <div class="container p-4">
-        <div class="row ">
-            <form method="post">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                <p class="m-0 py-1">Leave your feedback:</p>
-                <textarea class="w-100 p-3" name="text" rows="8" cols="80" placeholder="Type Feedback Here"></textarea>
-                <button class="btn btn-dark btn-md mt-2" type="submit">Submit Feedback</button>
-            </form>
+        {% else %}
+            <div class="container mt-4">
+                <p>Sorry No Available Work Posted for this Location :(</p>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <!-- Comment Section -->
+    <div class="container mt-5">
+        <h4>User comments</h4>
+        <hr>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="container-fluid my-2 rounded" style="border: 1px solid #ccc;">
+                    <div class="row p-3">
+                        <div class="col-md-1">
+                            {{ comment.user.username|capitalize }}
+                        </div>
+                        <div class="col-md">
+                            {{ comment.text }}
+                        </div>
+                        <div class="col-md-2">
+                            <small class="text-muted">{{ comment.date_posted }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="container mt-4">
+                <h5>No one has given feedback here :(</h5>
+                <p>please leave a review of your experience</p>
+            </div>
+        {% endif %}
+
+        <div class="container p-4">
+            <div class="row ">
+                <form method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <p class="m-0 py-1">Leave your feedback:</p>
+                    <textarea class="w-100 p-3" name="comment-text" rows="8" cols="80" placeholder="Type Feedback Here"></textarea>
+                    <button class="btn btn-dark btn-md mt-2" type="submit">Submit Feedback</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 {% endblock content %}

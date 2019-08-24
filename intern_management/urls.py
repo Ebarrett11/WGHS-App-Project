@@ -9,13 +9,8 @@ urlpatterns = [
         name='home'
     ),
     path(
-        'profile/',
-        views.InternshipListView.as_view(),
-        name='profile'
-    ),
-    path(
         'location/<int:pk>/',
-        views.IntershipLocationDetail.as_view(),
+        views.IntershipDetailView.as_view(),
         name='location_details'
     ),
     path(

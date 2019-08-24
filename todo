@@ -9,14 +9,17 @@ E:
 
     Add more options to home page search e.g make search able to search by tags
 
-L:
+    Finish Location Manager functionality (should be able to edit locations they have permission to edit)
+
     Write Tests for all Django code
+L:
 
     Search by zip code
 
     Work available section with User sign up on location detail page
 
-    Finish Location Manager functionality (should be able to edit locations they have permission to edit)
+    User Account Edit Page
+
 
 Things to talk about with Irvin:
 

@@ -23,7 +23,7 @@ class CommentInline(admin.TabularInline):
 
 class AvailabeWorkInline(admin.TabularInline):
     model = AvailableWorkModel
-    fields = ("subject", "text")
+    fields = ("subject", "text", "students")
     can_delete = True
     extra = 0
 
