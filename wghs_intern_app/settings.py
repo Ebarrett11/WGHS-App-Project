@@ -149,7 +149,7 @@ MEDIA_URL = '/media/'
 
 # Email Settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.google.com'
 
