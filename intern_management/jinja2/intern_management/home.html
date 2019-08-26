@@ -161,6 +161,8 @@ crossorigin=""></script>
                 marker.bindPopup(
                     "<p>{{ location.title }}</p>"
                 );
+            }).catch(function(err){
+                console.log(err);
             })
             {% endfor %}
         {% endif %}
