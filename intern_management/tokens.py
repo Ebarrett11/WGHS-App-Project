@@ -1,11 +1,8 @@
-import hashlib
-
 from datetime import timedelta
 
 from django.utils import timezone
 from django.conf import settings
 from django.utils.crypto import constant_time_compare, salted_hmac
-from django.utils.encoding import force_bytes
 
 
 class UrlTokenGenerator:

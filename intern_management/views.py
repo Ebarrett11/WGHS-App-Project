@@ -1,7 +1,7 @@
-import hashlib
 import string
 import random
 
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.sites.shortcuts import get_current_site
@@ -32,7 +32,7 @@ class HomePageView(ListView):
 
     def get_queryset(self):
         if self.request.GET.get('search'):
-            queryset = self.request.user.internshiplocationmodel_set.filter(
+            queryset = InternshipLocationModel.objects.filter(
                 Q(title__contains=self.request.GET['search'])
                 | Q(description__contains=self.request.GET['search'])
             ).order_by('title')
@@ -49,49 +49,50 @@ class IntershipDetailView(DetailView):
         location = kwargs['object']
         context = super().get_context_data(**kwargs)
         context.setdefault("comments", location.commentmodel_set.all())
+        if self.request.user.is_authenticated:
+            if location in self.request.user.internshiplocationmodel_set.all():
+                context.setdefault("is_enrolled", True)
 
-        if location in self.request.user.internshiplocationmodel_set.all():
-            context.setdefault("is_enrolled", True)
-
-        context.setdefault(
-            "total_hours", location.get_total_hours(self.request.user)
-        )
-        context.setdefault(
-            "available_work",
-            location.availableworkmodel_set.all()
-        )
-
+            context.setdefault(
+                "total_hours", location.get_total_hours(self.request.user)
+            )
+            context.setdefault(
+                "available_work",
+                location.availableworkmodel_set.all()
+            )
         return context
 
     def post(self, *args, **kwargs):
-        if "comment-text" in self.request.POST:
-            CommentModel.objects.create(
-                user=self.request.user,
-                location=get_object_or_404(
-                    InternshipLocationModel, pk=kwargs['pk']
-                ),
-                text=self.request.POST['text'],
-                date_posted=timezone.now()
-            )
+        if self.request.user.is_authenticated:
+            if "comment-text" in self.request.POST:
+                CommentModel.objects.create(
+                    user=self.request.user,
+                    location=get_object_or_404(
+                        InternshipLocationModel, pk=kwargs['pk']
+                    ),
+                    text=self.request.POST['text'],
+                    date_posted=timezone.now()
+                )
 
-        if "sign-up" in self.request.POST:
-            work_pk = self.request.POST.get("sign-up")
-            work = get_object_or_404(AvailableWorkModel, pk=work_pk)
-            work.students.add(self.request.user)
+            if "sign-up" in self.request.POST:
+                work_pk = self.request.POST.get("sign-up")
+                work = get_object_or_404(AvailableWorkModel, pk=work_pk)
+                work.students.add(self.request.user)
 
-            send_mail(
-                {
-                    "name": self.request.user.username,
-                    "work": work.subject,
-                    "location": work.location.title,
-                    "email": self.request.user.email
-                },
-                settings.ADMIN_EMAIL,
-                email_template_name="emails/work_sign_up.html",
-                subject_template_name="emails/work_sign_up_subject.txt"
-            )
-
-        return redirect("intern_management:location_details", pk=kwargs['pk'])
+                send_mail(
+                    {
+                        "name": self.request.user.username,
+                        "work": work.subject,
+                        "location": work.location.title,
+                        "email": self.request.user.email
+                    },
+                    settings.ADMIN_EMAIL,
+                    email_template_name="emails/work_sign_up.html",
+                    subject_template_name="emails/work_sign_up_subject.txt"
+                )
+                return redirect("intern_management:location_details", pk=kwargs['pk'])
+        else:
+            raise PermissionDenied()
 
 
 class InternshipSignUpView(TemplateView):
